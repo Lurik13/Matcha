@@ -1,0 +1,38 @@
+services:
+  nginx:
+    image: nginx:1.29.1
+    container_name: matcha-nginx
+    ports:
+      - ""
+    volumes:
+    depends_on:
+    networks:
+
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    container-name: matcha-php
+    volumes:
+    depends_on:
+    networks:
+
+  phpmyadmin:
+    image:
+    container_name: matcha-php
+    environment:
+    ports:
+    depends_on:
+    networks:
+
+  db:
+    image: mysql:9.4.0
+    container_name:
+    environment:
+    volumes:
+    ports:
+    networks:
+
+volumes:
+
+networks:
