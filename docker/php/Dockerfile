@@ -3,3 +3,9 @@ RUN php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN sudo mv composer.phar /usr/local/bin/composer
+RUN curl -1sLf &#039;https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh&#039; | sudo -E bash &amp;&amp; 
+RUN sudo apt install symfony-cli \
+                    php8.1-xml \
+                    php8.1-mbstring \
+                    php8.1-intl \
+                    php8.1-mysql
