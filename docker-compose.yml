@@ -3,36 +3,60 @@ services:
     image: nginx:1.29.1
     container_name: matcha-nginx
     ports:
-      - ""
+      - "8000:80"
     volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./app:/var/www/html
     depends_on:
+      - php
+      - db
     networks:
+      - matcha-network
 
   php:
     build:
       context: ./docker/php
       dockerfile: Dockerfile
-    container-name: matcha-php
+    container_name: matcha-php
     volumes:
+      - ./app:/var/www/html
     depends_on:
+      - db
     networks:
+      - matcha-network
 
   phpmyadmin:
-    image:
-    container_name: matcha-php
+    image: phpmyadmin/phpmyadmin
+    container_name: matcha-phpmyadmin
     environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
+      - "8080:80"
     depends_on:
+      - db
     networks:
+      - matcha-network
 
   db:
     image: mysql:9.4.0
-    container_name:
+    container_name: matcha-db
     environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/sql/setup.sql:/docker-entrypoint-initdb.d/setup.sql
     ports:
+      - "3306:3306"
     networks:
+      - matcha-network
 
 volumes:
+  db_data:
 
 networks:
+  matcha-network:
+    driver: bridge
