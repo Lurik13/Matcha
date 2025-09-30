@@ -1,7 +1,7 @@
 import { useState, type Dispatch, type SetStateAction } from 'react';
-import Fulcrum from './assets/Fulcrum.png'
-import JaigEyes from './assets/JaigEyes.png'
-import ImageBoolean from './ImageBoolean';
+import Fulcrum from '$/assets/Fulcrum.png'
+import JaigEyes from '$/assets/JaigEyes.png'
+import ImageBoolean from '$/components/ImageBoolean';
 
 interface Props {
   password: string | null;

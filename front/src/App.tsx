@@ -1,10 +1,10 @@
 import React from 'react';
-// import {Button} from 'react-native';
 import { useState } from 'react'
-import Input from './Input'
+import Input from './components/Input'
 import './App.css'
-import ImageBoolean from './ImageBoolean';
-import PasswordInput from './PasswordInput';
+import ImageBoolean from './components/ImageBoolean';
+import PasswordInput from '$/components/PasswordInput';
+import Button from './components/Button';
 
 function App() {
   const [email, setEmail] = useState<string | null>(null);
@@ -29,10 +29,12 @@ function App() {
           Forgot password?
         </div>
         <br></br>
-        <br></br>
-        Login
+        <Button
+          text="Login"
+          colour='#9b0000'
+          url='test'
+        />
         <div className="loginSeparation"></div>
-        or continue with
         <button className="otherConnection"></button>
         <button className="otherConnection"></button>
         <button className="otherConnection"></button>
