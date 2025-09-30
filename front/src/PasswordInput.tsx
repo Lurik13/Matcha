@@ -17,10 +17,10 @@ const PasswordInput = (props: Props) => {
   }
 
   return (
-    <div className="mx-46 my-5">
+    <div className="my-5">
       <label 
         htmlFor={label} 
-        className="text-xs  float-left"
+        className="text-xs block text-left"
       >
         {label}
       </label>
@@ -28,17 +28,20 @@ const PasswordInput = (props: Props) => {
         <input
           id={label}
           name={label}
-          size={10}
+          size={17}
+          placeholder='Enter password'
           value={props.password ? props.password : ""}
-          type="string"
+          type={isHiddenPassword ? "password" : "text"}
           onChange={handlePasswordChange}
         />
-        <ImageBoolean
-          imageOn={JaigEyes}
-          imageOff={Fulcrum}
-          isOn={isHiddenPassword}
-          action={() => setIsHiddenPassword(!isHiddenPassword)}
-        />
+        <div className='border-l '>
+          <ImageBoolean
+            imageOn={JaigEyes}
+            imageOff={Fulcrum}
+            isOn={isHiddenPassword}
+            action={() => setIsHiddenPassword(!isHiddenPassword)}
+          />
+        </div>
       </div>
     </div>
   );

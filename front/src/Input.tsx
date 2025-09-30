@@ -7,10 +7,10 @@ interface Props {
 }
 
 const Input = (props: Props) => (
-  <div className="mx-46 my-5">
+  <div className="my-5">
     <label 
       htmlFor={props.label} 
-      className="text-xs  float-left"
+      className="text-xs float-left"
     >
       {props.label}
     </label>
