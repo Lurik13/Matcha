@@ -17,14 +17,14 @@ const PasswordInput = (props: Props) => {
   }
 
   return (
-    <div className="my-5">
+    <div className="mt-5">
       <label 
         htmlFor={label} 
         className="text-xs block text-left"
       >
         {label}
       </label>
-      <div className="border flex">
+      <div className="border flex flex-container">
         <input
           id={label}
           name={label}
@@ -32,9 +32,10 @@ const PasswordInput = (props: Props) => {
           placeholder='Enter password'
           value={props.password ? props.password : ""}
           type={isHiddenPassword ? "password" : "text"}
+          className='flex-grow-200'
           onChange={handlePasswordChange}
         />
-        <div className='border-l '>
+        <div className='border-l flex-grow-1'>
           <ImageBoolean
             imageOn={JaigEyes}
             imageOff={Fulcrum}

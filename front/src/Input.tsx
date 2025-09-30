@@ -15,7 +15,7 @@ const Input = (props: Props) => (
       {props.label}
     </label>
     <input
-      className="border"
+      className="border w-full"
       id={props.label}
       name={props.label}
       value={props.value ? props.value : ""}

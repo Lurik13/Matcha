@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className='text-center max-w-69'>
+      <div className='text-center max-w-80'>
         <h1 className='text-4xl'>Login</h1>
         <Input
           value={email}
@@ -24,8 +24,8 @@ function App() {
         <PasswordInput
           password={password}
           setPassword={setPassword}
-          />
-        <div className='text-blue-500'>
+        />
+        <div className='text-blue-500 text-xs float-right'>
           Forgot password?
         </div>
         <br></br>

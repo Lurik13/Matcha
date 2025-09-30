@@ -10,7 +10,7 @@ const ImageBoolean = (props: Props) => (
     <img
       src={props.isOn ? props.imageOn : props.imageOff}
       alt="imageBoolean"
-      className="cursor-pointer w-5 h-5 my-1 mx-2"
+      className="cursor-pointer w-5 h-5 my-1 mx-1"
       onClick={props.action}
     />
   </div>
