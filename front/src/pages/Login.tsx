@@ -2,6 +2,8 @@ import { useState } from 'react'
 import Input from '$/components/Input'
 import PasswordInput from '$/components/PasswordInput';
 import Button from '$/components/Button';
+import TextLink from '$/components/TextLink';
+import ForgotPassword from './ForgotPassword';
 
 function Login() {
   const [email, setEmail] = useState<string | null>(null);
@@ -22,16 +24,26 @@ function Login() {
           password={password}
           setPassword={setPassword}
         />
-        <div className='text-blue-500 text-xs text-right mb-5'>
-          Forgot password?
+        <div className='flex justify-end mb-5'>
+          <TextLink
+            text="Forgot password?"
+            className="text-blue-500 text-xs"
+            link="/forgot-password"
+            />
         </div>
         <Button
           text="Login"
           colour='#9b0000'
           url='test'
         />
-        Don't have an account?
-        Sign up now
+        <div className="text-xs">
+          Don't have an account?
+          <TextLink
+            text="Register"
+            className="text-blue-500 mx-2"
+            link="/register"
+          />
+        </div>
       </div>
     </div>
   )

@@ -32,7 +32,7 @@ const PasswordInput = (props: Props) => {
           placeholder='Enter password'
           value={props.password ? props.password : ""}
           type={isHiddenPassword ? "password" : "text"}
-          className='flex-grow-200'
+          className='flex-grow-200 px-1'
           onChange={handlePasswordChange}
         />
         <div className='border-l flex-grow-1'>
