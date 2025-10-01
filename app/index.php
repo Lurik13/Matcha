@@ -1,3 +1,2 @@
-<?php 
-    echo '<h1>Salut<h1>';
-?>
+<?php
+echo '<h1>Salut<h1>';

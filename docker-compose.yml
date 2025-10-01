@@ -3,7 +3,7 @@ services:
     image: nginx:1.29.1
     container_name: matcha-nginx
     ports:
-      - "8000:8000"
+      - "8000:80"
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./app:/var/www/html
@@ -30,7 +30,7 @@ services:
       dockerfile: docker/front/Dockerfile
     container_name: matcha-front
     ports:
-      - "80:80"
+      - "3000:80"
     volumes:
       - ./front:/app/front
       - /app/front/node_modules
