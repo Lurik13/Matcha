@@ -3,7 +3,6 @@ import Input from '$/components/Input'
 import PasswordInput from '$/components/PasswordInput';
 import Button from '$/components/Button';
 import TextLink from '$/components/TextLink';
-import ForgotPassword from './ForgotPassword';
 
 function Login() {
   const [email, setEmail] = useState<string | null>(null);
@@ -33,7 +32,7 @@ function Login() {
         </div>
         <Button
           text="Login"
-          colour='#9b0000'
+          colour='bg-red-800'
           url='test'
         />
         <div className="text-xs">

@@ -1,3 +1,6 @@
+import useFetch from '$/components/useFetch'
+import { useNavigate } from 'react-router-dom';
+
 interface Props {
   text: string;
   colour: string;
@@ -5,8 +8,20 @@ interface Props {
 }
 
 const Button = (props: Props) => {
+  const navigate = useNavigate();
+  
+  const handleClick = async () => {
+    const data = await useFetch("https://api.github.com/users/Lurik13654654");
+    if (data.login == "Lurik13") {
+      navigate('/register');
+    }
+  };
+
   return (
-    <div className={"bg-green-500 cursor-pointer select-none"}>
+    <div 
+      className={`${props.colour} cursor-pointer select-none`}
+      onClick={handleClick}
+    >
       {props.text}
     </div>
   );
