@@ -1,12 +1,9 @@
-import React from 'react';
 import { useState } from 'react'
-import Input from './components/Input'
-import './App.css'
-import ImageBoolean from './components/ImageBoolean';
+import Input from '$/components/Input'
 import PasswordInput from '$/components/PasswordInput';
-import Button from './components/Button';
+import Button from '$/components/Button';
 
-function App() {
+function Login() {
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
 
@@ -25,19 +22,14 @@ function App() {
           password={password}
           setPassword={setPassword}
         />
-        <div className='text-blue-500 text-xs float-right'>
+        <div className='text-blue-500 text-xs text-right mb-5'>
           Forgot password?
         </div>
-        <br></br>
         <Button
           text="Login"
           colour='#9b0000'
           url='test'
         />
-        <div className="loginSeparation"></div>
-        <button className="otherConnection"></button>
-        <button className="otherConnection"></button>
-        <button className="otherConnection"></button>
         Don't have an account?
         Sign up now
       </div>
@@ -45,4 +37,4 @@ function App() {
   )
 }
 
-export default App
+export default Login
