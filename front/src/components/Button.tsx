@@ -11,7 +11,7 @@ const Button = (props: Props) => {
   const navigate = useNavigate();
   
   const handleClick = async () => {
-    const data = await useFetch("https://api.github.com/users/Lurik13654654");
+    const data = await useFetch("https://api.github.com/users/Lurik13");
     if (data.login == "Lurik13") {
       navigate('/register');
     }
