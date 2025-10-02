@@ -20,8 +20,10 @@ function Login() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <PasswordInput
+          className='mt-5'
           password={password}
           setPassword={setPassword}
+          label="Password"
         />
         <div className='flex justify-end mb-5'>
           <TextLink
@@ -33,7 +35,7 @@ function Login() {
         <Button
           text="Login"
           colour='bg-red-800'
-          url='test'
+          // url='test'
         />
         <div className="text-xs">
           Don't have an account?

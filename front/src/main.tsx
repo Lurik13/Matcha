@@ -1,9 +1,9 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router';
 import './index.css'
 import Login from './pages/Login.tsx'
-import ForgotPassword from './pages/ForgotPassword.tsx';
+import ForgotPassword from './pages/ResetPassword.tsx';
 import Register from './pages/Register.tsx';
 
 const root = document.getElementById("root") as HTMLElement;

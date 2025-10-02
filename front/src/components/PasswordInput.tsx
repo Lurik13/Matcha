@@ -4,12 +4,13 @@ import JaigEyes from '$/assets/JaigEyes.png'
 import ImageBoolean from '$/components/ImageBoolean';
 
 interface Props {
+  className: string;
   password: string | null;
+  label: string;
   setPassword: Dispatch<SetStateAction<string | null>>;
 }
 
 const PasswordInput = (props: Props) => {
-  const label = "Password";
   const [isHiddenPassword, setIsHiddenPassword] = useState<boolean>(true);
   
   const handlePasswordChange =  (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,17 +18,17 @@ const PasswordInput = (props: Props) => {
   }
 
   return (
-    <div className="mt-5">
+    <div className={props.className}>
       <label 
-        htmlFor={label} 
+        htmlFor={props.label} 
         className="text-xs block text-left"
       >
-        {label}
+        {props.label}
       </label>
       <div className="border flex flex-container">
         <input
-          id={label}
-          name={label}
+          id={props.label}
+          name={props.label}
           size={17}
           placeholder='Enter password'
           value={props.password ? props.password : ""}

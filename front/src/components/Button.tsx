@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 interface Props {
   text: string;
   colour: string;
-  url: string;
+  route?: string;
+  className?: string;
 }
 
 const Button = (props: Props) => {
@@ -19,7 +20,7 @@ const Button = (props: Props) => {
 
   return (
     <div 
-      className={`${props.colour} cursor-pointer select-none`}
+      className={`${props.colour} ${props.className} cursor-pointer select-none`}
       onClick={handleClick}
     >
       {props.text}
