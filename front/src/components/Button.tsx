@@ -13,8 +13,8 @@ const Button = (props: Props) => {
   
   const handleClick = async () => {
     const data = await useFetch("https://api.github.com/users/Lurik13");
-    if (data.login == "Lurik13") {
-      navigate('/register');
+    if (data.login == "Lurik13" && props.route) {
+      navigate(props.route);
     }
   };
 

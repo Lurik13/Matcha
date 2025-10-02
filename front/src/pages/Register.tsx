@@ -2,8 +2,10 @@ import { useState } from 'react'
 import Input from '$/components/Input'
 import PasswordInput from '$/components/PasswordInput';
 import Button from '$/components/Button';
+import TextLink from '$/components/TextLink';
 
 function Register() {
+  const [userName, setUserName] = useState<string | null>(null);
   const [firstName, setFirstName] = useState<string | null>(null);
   const [lastName, setLastName] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
@@ -14,6 +16,13 @@ function Register() {
     <div className="flex justify-center items-center min-h-screen">
       <div className='text-center max-w-80'>
         <h1 className='text-4xl'>Register</h1>
+        <Input
+          value={userName}
+          label={"UserName"}
+          placeholder="Darth Plagueis"
+          type="text"
+          onChange={(e) => setUserName(e.target.value)}
+        />
         <Input
           value={firstName}
           label={"First Name"}
@@ -52,6 +61,14 @@ function Register() {
           colour='bg-cyan-300'
           // url='test'
         />
+        <div className="text-xs">
+          Already have an account?
+          <TextLink
+            text="Login"
+            className="text-blue-500 mx-2"
+            link="/login"
+          />
+        </div>
       </div>
     </div>
   )

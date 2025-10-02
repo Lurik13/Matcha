@@ -8,7 +8,7 @@ interface Props {
 
 const TextLink = (props: Props) => {
   return (
-    <Link to={props.link} className={`cursor-pointer select-none ${props.className}`}>
+    <Link to={props.link} className={`cursor-pointer select-none ${props.className} hover:underline`}>
       {props.text}
     </Link>
   );
