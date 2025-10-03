@@ -6,6 +6,7 @@ import Login from './pages/Login.tsx'
 import Register from './pages/Register.tsx';
 import ForgotPassword from './pages/ForgotPassword.tsx';
 import ResetPassword from './pages/ResetPassword.tsx';
+import Home from './pages/Home.tsx';
 
 const root = document.getElementById("root") as HTMLElement;
 createRoot(root).render(
@@ -16,6 +17,7 @@ createRoot(root).render(
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
