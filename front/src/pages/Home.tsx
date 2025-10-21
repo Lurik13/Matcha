@@ -7,28 +7,32 @@ const WIDTH = window.innerWidth
 const HEIGHT = window.innerHeight
 
 const Canvas = () => {
-  const layerRef = useRef<any>(null)
-  layerRef.current?.add(new Konva.Rect({
-    width:window.innerWidth,
-    height:window.innerHeight,
-    fill:"black"
-  }));
+  const stars = useRef<any>(null);
+  const space = useRef<any>(null);
+  
   useEffect(() => {
+    const rect = new Konva.Rect({
+      width: WIDTH,
+      height: HEIGHT,
+      fill: 'black'
+    });
+    space.current?.add(rect);
+  
     for (let i = 0; i < 1000; i++) {
       const radius = Math.random()
       const circle = new Konva.Circle({
         x: Math.random() * WIDTH,
         y: Math.random() * HEIGHT,
         radius,
-        fill: 'black',
+        fill: 'white',
       })
-      layerRef.current?.add(circle)
+      stars.current?.add(circle)
     }
 
     const anim = new Konva.Animation(() => {
-      layerRef.current?.children?.forEach((star: any) => {
-        const star_radius = star.radius()
-        const speed = star_radius
+      stars.current?.children?.forEach((star: any) => {
+        const star_radius = star.radius();
+        const speed = star_radius / 5;
         star.x(star.x() - speed)
         star.y(star.y() + speed * 0.3)
         if (star.x() < -star_radius) {
@@ -38,7 +42,7 @@ const Canvas = () => {
           star.y(-star_radius);
         }
       })
-    }, layerRef.current)
+    }, stars.current)
 
     anim.start()
     return () => anim.stop()
@@ -50,7 +54,8 @@ const Canvas = () => {
       height={HEIGHT}
       listening={false}
     >
-      <Layer ref={layerRef} />
+      <Layer ref={space} />
+      <Layer ref={stars} />
     </Stage>
   )
 }
