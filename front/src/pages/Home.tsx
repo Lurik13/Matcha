@@ -32,7 +32,7 @@ const Canvas = () => {
     const anim = new Konva.Animation(() => {
       stars.current?.children?.forEach((star: any) => {
         const star_radius = star.radius();
-        const speed = star_radius / 5;
+        const speed = star_radius / 7;
         star.x(star.x() - speed)
         star.y(star.y() + speed * 0.3)
         if (star.x() < -star_radius) {
