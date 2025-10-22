@@ -6,6 +6,21 @@ import Input from '$/components/Input';
 const WIDTH = window.innerWidth
 const HEIGHT = window.innerHeight
 
+function getRandomColour() {
+  const letters = ['d', 'e', 'f'];
+  let colour = ['a', 'a', 'a'];
+
+  const redOrBlue = Math.round(Math.random());
+  const mid_colour = Math.round(Math.random() * 2);
+  const second_colour = Math.round(Math.random() * mid_colour);
+
+  colour[redOrBlue * 2] = 'f';
+  colour[1] = letters[mid_colour];
+  colour[Math.abs(redOrBlue * 2 - 2)] = letters[second_colour];
+
+  return '#' + colour[0] + colour[1] + colour[2];
+}
+
 const Canvas = () => {
   const stars = useRef<any>(null);
   const space = useRef<any>(null);
@@ -24,7 +39,7 @@ const Canvas = () => {
         x: Math.random() * WIDTH,
         y: Math.random() * HEIGHT,
         radius,
-        fill: 'white',
+        fill: getRandomColour(),
       })
       stars.current?.add(circle)
     }
