@@ -34,7 +34,7 @@ const StarsBackground = () => {
     space.current?.add(rect);
   
     for (let i = 0; i < 1000; i++) {
-      const radius = Math.random()
+      const radius = Math.random() ** 2.5
       const circle = new Konva.Circle({
         x: Math.random() * WIDTH,
         y: Math.random() * HEIGHT,
