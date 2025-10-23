@@ -1,29 +1,41 @@
-import { useState } from 'react';
-import Input from '$/components/Input';
-import StarsBackground from '$/pages/StarsBackground';
+import { useState } from 'react'
+import Input from '$/components/Input'
+import StarsBackground from '$/pages/StarsBackground'
+import '$/components/hologram.css'
+import Login from './Login'
 
-function Home () {
-  const [userName, setUserName] = useState<string | null>(null);
+function Home() {
+  // const [userName, setUserName] = useState<string | null>(null)
+
   return (
-    <div>
-      <Input
-        value={userName}
-        label={"UserName"}
-        placeholder="Darth Plagueis"
-        type="text"
-        onChange={(e) => setUserName(e.target.value)}
-      />
-      <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          zIndex: -1,
-          backgroundColor: 'black',
-        }}>
+    <div className="relative h-screen overflow-hidden">
+      <div className="fixed w-full h-full -z-10">
         <StarsBackground />
       </div>
+
+      <div className="relative flex flex-col items-center justify-center h-full">
+        {/* <Input
+          value={userName}
+          label="UserName"
+          placeholder="Darth Plagueis"
+          type="text"
+          className="text-blue-400"
+          onChange={(e) => setUserName(e.target.value)}
+        /> */}
+
+        <Login />
+
+        {/* <div
+          style={{
+            width: window.innerWidth / 2,
+            height: window.innerHeight / 2,
+            backgroundColor: 'red',
+          }}
+          // className="layer2 rounded-lg opacity-60"
+        /> */}
+      </div>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

@@ -1,0 +1,8 @@
+.layer2 {
+	background: repeating-linear-gradient(
+		transparent 0,
+		hsl(182, 38%, 54%) calc(var(--line-width) / 2),
+		transparent var(--line-width)
+	);
+	mix-blend-mode: overlay;
+}

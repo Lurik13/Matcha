@@ -3,11 +3,12 @@ interface Props {
   label: string;
   placeholder?: string;
   type: string;
+  className?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = (props: Props) => (
-  <div className="my-5">
+  <div className={`my-5 ${props?.className}`}>
     <label 
       htmlFor={props.label} 
       className="text-xs float-left"
