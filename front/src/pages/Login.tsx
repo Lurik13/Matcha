@@ -3,6 +3,7 @@ import Input from '$/components/Input'
 import PasswordInput from '$/components/PasswordInput';
 import Button from '$/components/Button';
 import TextLink from '$/components/TextLink';
+import '$/style/text-glow.css';
 
 function Login() {
   const [userName, setUserName] = useState<string | null>(null);
@@ -11,13 +12,13 @@ function Login() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className='text-center max-w-80'>
-        <h1 className='text-4xl text-blue-500'>Login</h1>
+        <h1 className='text-4xl text-blue-500 glow'>Login</h1>
         <Input
           value={userName}
           label={"UserName"}
           placeholder="Darth Plagueis"
           type="text"
-          className='text-blue-500'
+          // className='glow'
           onChange={(e) => setUserName(e.target.value)}
         />
         <PasswordInput
