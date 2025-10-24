@@ -12,7 +12,6 @@ class Database
     {
         try {
             $dsn = "mysql:host=$db_host;dbname=$db_name;charset=utf8";
-            
             $this->pdo = new PDO($dsn, $db_user, $db_password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
