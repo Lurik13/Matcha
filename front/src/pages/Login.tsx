@@ -12,13 +12,12 @@ function Login() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className='text-center max-w-80'>
-        <h1 className='text-4xl text-blue-500 glow'>Login</h1>
+        <h1 className='text-4xl glow'>Login</h1>
         <Input
           value={userName}
           label={"UserName"}
           placeholder="Darth Plagueis"
           type="text"
-          // className='glow'
           onChange={(e) => setUserName(e.target.value)}
         />
         <PasswordInput

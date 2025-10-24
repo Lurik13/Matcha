@@ -56,11 +56,11 @@ const StarsBackground = () => {
         if (star.y() > HEIGHT + star_radius) {
           star.y(-star_radius);
         }
-      })
+      });
     }, stars.current)
 
-    anim.start()
-    return () => anim.stop()
+    anim.start();
+    return () => anim.stop();
   }, [])
 
   return (

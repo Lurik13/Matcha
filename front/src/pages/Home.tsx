@@ -3,14 +3,18 @@ import Input from '$/components/Input'
 import StarsBackground from '$/pages/StarsBackground'
 import '$/components/hologram.css'
 import Login from './Login'
+import Hologram from './Hologram'
 
 function Home() {
   // const [userName, setUserName] = useState<string | null>(null)
 
   return (
     <div className="relative h-screen overflow-hidden">
-      <div className="fixed w-full h-full -z-10">
+      <div className="fixed w-full h-full -z-20">
         <StarsBackground />
+      </div>
+      <div className="fixed w-full h-full z-20">
+          <Hologram />
       </div>
 
       <div className="relative flex flex-col items-center justify-center h-full">
@@ -35,7 +39,7 @@ function Home() {
         /> */}
       </div>
     </div>
-  )
+  );
 }
 
 export default Home
