@@ -25,11 +25,19 @@ class User
     {
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE username = ? OR email = ?");
         $stmt->execute([$username, $email]);
-        if ($stmt->fetchColumn() > 0) {
-            throw new \Exception("Username or email already exists.");
-        }
+        if ($stmt->fetchColumn() > 0){ throw new \Exception("Username or email already exists."); }
+
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
         return $stmt->execute([$username, $email, $hashedPassword]);
+    }
+
+    public function loginUser($username, $password)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$username]);
+        $user = $stmt->fetch();
+        if ($user && password_verify($password, $user['password'])) { return $user; }
+        else { throw new \Exception("Invalid username or password."); return false; }
     }
 }
