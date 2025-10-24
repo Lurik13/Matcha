@@ -21,15 +21,15 @@ class User
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function registerUser($username, $email, $password)
+    public function registerUser($username, $email, $password, $firstname, $lastname)
     {
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE username = ? OR email = ?");
         $stmt->execute([$username, $email]);
         if ($stmt->fetchColumn() > 0){ throw new \Exception("Username or email already exists."); }
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        return $stmt->execute([$username, $email, $hashedPassword]);
+        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, firstname, lastname) VALUES (?, ?, ?, ?, ?)");
+        return $stmt->execute([$username, $email, $hashedPassword, $firstname, $lastname]);
     }
 
     public function loginUser($username, $password)
