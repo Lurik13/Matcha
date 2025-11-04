@@ -40,4 +40,15 @@ class User
         if ($user && password_verify($password, $user['password'])) { return $user; }
         else { throw new \Exception("Invalid username or password."); return false; }
     }
+
+    public function updatePassword($password, $id)
+    {
+        $stmt = $this->pdo->prepare("UPDATE users SET password = ? WHERE user_id = ?");
+        return $stmt->execute([$password, $id]);
+    }
+
+    public function updateUsername($username, $id)
+    {
+        
+    }
 }
