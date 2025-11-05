@@ -71,4 +71,20 @@ class UserController extends AbstractController
             return new Response($e->getMessage(), 401);
         }
     }
+
+    #[Route('/user/{id}/update_password', name: 'update_password', methods: ['POST'])]
+    public function updatePassword(int $id, Request $request): Response
+    {
+        $data = json_decode($request->getContent(), true);
+        $newPassword = trim(htmlspecialchars($data['password'] ?? null));
+
+        if (!$newPassword) {
+            return new Response("Missing new password", 400);
+        }
+
+        $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+        $this->userModel->updatePassword($hashedPassword, $id);
+
+        return new Response("Password updated successfully");
+    }
 }
