@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import Input from '$/components/Input'
 import StarsBackground from '$/pages/StarsBackground'
 import '$/components/hologram.css'
 import Login from './Login'

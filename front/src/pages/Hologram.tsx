@@ -23,8 +23,11 @@ function getX(y: number) {
 }
 
 function getWidth(y: number) {
-  if (y < spawnCoos + 20 || y > spawnCoos + 450 - 20) {
-    return WIDTH / 4 - spawnCoos + 20 - y;
+  if (y < spawnCoos + 20) {
+    console.log(WIDTH / 4, WIDTH / 4 - spawnCoos + 20 - y)
+    return WIDTH / 4 + spawnCoos + 20 - y;
+  } else if (y > spawnCoos + 450 - 20) {
+    return WIDTH / 4 + y - spawnCoos + 450;
   }
   return WIDTH / 4;
 }
@@ -39,7 +42,7 @@ const Hologram = () => {
       const rect = new Konva.Rect({
         x: WIDTH / 2 - WIDTH / 8,
         y: y,
-        width: WIDTH / 4,
+        width: getWidth(y),
         height: 2,
         fill: '#0459c9ff',
         opacity: getOpacity(y),
@@ -53,6 +56,7 @@ const Hologram = () => {
         const y = line.y();
         line.opacity(getOpacity(y));
         line.y(y + speed);
+        line.width(getWidth(y));
         if (y > spawnCoos + 450) {
           line.opacity(0);
           line.y(spawnCoos);

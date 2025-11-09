@@ -2,8 +2,8 @@ import { Stage, Layer } from 'react-konva';
 import Konva from 'konva';
 import { useEffect, useRef } from 'react';
 
-const WIDTH = window.innerWidth
-const HEIGHT = window.innerHeight
+let WIDTH = window.innerWidth
+let HEIGHT = window.innerHeight
 const STARS_ANGLE = 0.3;
 
 function getRandomColour() {
@@ -47,7 +47,7 @@ const StarsBackground = () => {
     const anim = new Konva.Animation(() => {
       stars.current?.children?.forEach((star: any) => {
         const star_radius = star.radius();
-        const speed = star_radius / 7;
+        const speed = star_radius / 5;
         star.x(star.x() - speed);
         star.y(star.y() + speed * STARS_ANGLE);
         if (star.x() < -star_radius) {
