@@ -2,21 +2,22 @@ import { Stage, Layer } from 'react-konva';
 import Konva from 'konva';
 import { useEffect, useRef } from 'react';
 
-const WIDTH = window.innerWidth
-const HEIGHT = window.innerHeight
-const spawnCoos = HEIGHT / 2 - HEIGHT / 4;
+const WIDTH = 374;
+const HEIGHT = 450;
+// const 
+const spawnCoos = 0;
 
 function getOpacity(y: number) {
   if (y < spawnCoos + 20) {
     return (y - spawnCoos) / 100;
-  } else if (y > spawnCoos + 450 - 20) {
-    return (spawnCoos + 450 - y) / 100;
+  } else if (y > spawnCoos + HEIGHT - 20) {
+    return (spawnCoos + HEIGHT - y) / 100;
   }
   return 0.2;
 }
 
 function getX(y: number) {
-  if (y < spawnCoos + 20 || y > spawnCoos + 450 - 20) {
+  if (y < spawnCoos + 20 || y > spawnCoos + HEIGHT - 20) {
     return WIDTH / 2 - WIDTH / 8 + spawnCoos + 20 - y;
   }
   return WIDTH / 2 - WIDTH / 8;
@@ -26,8 +27,8 @@ function getWidth(y: number) {
   if (y < spawnCoos + 20) {
     console.log(WIDTH / 4, WIDTH / 4 - spawnCoos + 20 - y)
     return WIDTH / 4 + spawnCoos + 20 - y;
-  } else if (y > spawnCoos + 450 - 20) {
-    return WIDTH / 4 + y - spawnCoos + 450;
+  } else if (y > spawnCoos + HEIGHT - 20) {
+    return WIDTH / 4 + y - spawnCoos + HEIGHT;
   }
   return WIDTH / 4;
 }
@@ -40,9 +41,9 @@ const Hologram = () => {
       const y = spawnCoos + i * 4.5;
       console.log(getOpacity(y));
       const rect = new Konva.Rect({
-        x: WIDTH / 2 - WIDTH / 8,
+        x: 0,
         y: y,
-        width: getWidth(y),
+        width: WIDTH,
         height: 2,
         fill: '#0459c9ff',
         opacity: getOpacity(y),
@@ -56,8 +57,8 @@ const Hologram = () => {
         const y = line.y();
         line.opacity(getOpacity(y));
         line.y(y + speed);
-        line.width(getWidth(y));
-        if (y > spawnCoos + 450) {
+        line.width(WIDTH);
+        if (y > spawnCoos + HEIGHT) {
           line.opacity(0);
           line.y(spawnCoos);
         }
@@ -69,13 +70,15 @@ const Hologram = () => {
   }, [])
 
   return (
-    <Stage
-      width={WIDTH}
-      height={HEIGHT}
-      listening={false}
-    >
-      <Layer ref={holo} />
-    </Stage>
+    <div className="flex justify-center items-center w-full h-full">
+      <Stage
+        width={WIDTH}
+        height={HEIGHT}
+        listening={false}
+      >
+        <Layer ref={holo} />
+      </Stage>
+    </div>
   )
 }
 

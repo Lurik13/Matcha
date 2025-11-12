@@ -1,31 +1,28 @@
 .glow {
-  font-size: 80px;
-  color: #59d9f1;
+  color: var(--turquoise);
   text-align: center;
   opacity: 0.7;
-  animation: glow 1s ease-in-out infinite alternate;
+  text-shadow: 
+    0 0 10px var(--turquoise),
+    0 0 20px var(--turquoise),
+    0 0 30px var(--bleu-clair),
+    0 0 40px var(--bleu-clair),
+    0 0 50px var(--bleu-clair),
+    0 0 60px var(--bleu-clair),
+    0 0 70px var(--bleu-clair);
 }
 
-@keyframes glow {
-  from {
-    text-shadow: 
-      0 0 10px #59d9f1,
-      0 0 20px #59d9f1,
-      0 0 30px #2873ce,
-      0 0 40px #2873ce,
-      0 0 50px #2873ce,
-      0 0 60px #2873ce,
-      0 0 70px #2873ce;
-  }
-  
-  to {
-    text-shadow: 
-      0 0 15px #59d9f1,
-      0 0 25px #2892e2,
-      0 0 35px #2892e2,
-      0 0 45px #2892e2,
-      0 0 55px #2892e2,
-      0 0 65px #2892e2,
-      0 0 75px #2892e2;
-  }
+.box-glow {
+  box-shadow: 0 0 5px 1px var(--bleu-clair);
+}
+
+.icon-glow {
+  filter: 
+    drop-shadow(0 0 10px var(--turquoise))
+    drop-shadow(0 0 20px var(--turquoise))
+    drop-shadow(0 0 30px var(--bleu-clair))
+    drop-shadow(0 0 40px var(--bleu-clair))
+    drop-shadow(0 0 50px var(--bleu-clair))
+    drop-shadow(0 0 60px var(--bleu-clair))
+    drop-shadow(0 0 70px var(--bleu-clair))
 }

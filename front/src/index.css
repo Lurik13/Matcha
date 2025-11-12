@@ -6,6 +6,9 @@
 }
 
 :root {
+  --turquoise: #59d9f1;
+  --bleu-clair: #2873ce;
+
   font-family: Aurebesh, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 100;

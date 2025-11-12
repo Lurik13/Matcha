@@ -11,7 +11,7 @@ function Home() {
       <div className="fixed w-full h-full -z-20">
         <StarsBackground />
       </div>
-      <div className="fixed w-full h-full z-20">
+      <div className="fixed w-full h-full z-20 pointer-events-none">
           <Hologram />
       </div>
 

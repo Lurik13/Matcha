@@ -5,6 +5,7 @@ import ImageBoolean from '$/components/ImageBoolean';
 
 interface Props {
   className: string;
+  inputClassName?: string;
   password: string | null;
   label: string;
   setPassword: Dispatch<SetStateAction<string | null>>;
@@ -25,7 +26,7 @@ const PasswordInput = (props: Props) => {
       >
         {props.label}
       </label>
-      <div className="border flex flex-container">
+      <div className={`border flex flex-container  ${props?.inputClassName}`}>
         <input
           id={props.label}
           name={props.label}

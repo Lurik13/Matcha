@@ -4,6 +4,7 @@ interface Props {
   placeholder?: string;
   type: string;
   className?: string;
+  inputClassName?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -16,7 +17,7 @@ const Input = (props: Props) => (
       {props.label}
     </label>
     <input
-      className="border w-full px-1"
+      className={`border w-full px-1 ${props?.inputClassName}`}
       id={props.label}
       name={props.label}
       value={props.value ? props.value : ""}

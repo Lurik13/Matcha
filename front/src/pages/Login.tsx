@@ -12,16 +12,19 @@ function Login() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className='text-center max-w-80'>
-        <h1 className='text-4xl glow'>Login</h1>
+        <h1 className='glow text-6xl'>Login</h1>
         <Input
           value={userName}
           label={"UserName"}
           placeholder="Darth Plagueis"
           type="text"
+          className='glow'
+          inputClassName='box-glow'
           onChange={(e) => setUserName(e.target.value)}
         />
         <PasswordInput
-          className='mt-5'
+          className='mt-5 glow'
+          inputClassName='box-glow'
           password={password}
           setPassword={setPassword}
           label="Password"
@@ -29,13 +32,13 @@ function Login() {
         <div className='flex justify-end mb-5'>
           <TextLink
             text="Forgot password?"
-            className="text-blue-500 text-xs"
+            className="glow text-xs"
             link="/forgot-password"
             />
         </div>
         <Button
           text="Login"
-          colour='bg-red-800'
+          colour='bg-red-800 glow'
           // url='test'
         />
         <div className="text-xs">
