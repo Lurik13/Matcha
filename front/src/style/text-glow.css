@@ -12,8 +12,28 @@
     0 0 70px var(--bleu-clair);
 }
 
+.white-glow {
+  color: var(--bleu-tres-clair);
+  text-align: center;
+  opacity: 0.7;
+  text-shadow: 
+    0 0 10px var(--bleu-tres-clair),
+    0 0 20px var(--bleu-tres-clair),
+    0 0 30px var(--bleu-clair),
+    0 0 40px var(--bleu-clair),
+    0 0 50px var(--bleu-clair),
+    0 0 60px var(--bleu-clair),
+    0 0 70px var(--bleu-clair);
+}
+
 .box-glow {
   box-shadow: 0 0 5px 1px var(--bleu-clair);
+}
+
+.button-glow {
+  border: 1.5px solid var(--turquoise);
+  background-color: var(--bleu-clair-transparent);
+  box-shadow: 0 0 5px 3px var(--bleu-clair);
 }
 
 .icon-glow {

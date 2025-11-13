@@ -32,20 +32,20 @@ function Login() {
         <div className='flex justify-end mb-5'>
           <TextLink
             text="Forgot password?"
-            className="glow text-xs"
+            className="white-glow text-xs"
             link="/forgot-password"
             />
         </div>
         <Button
           text="Login"
-          colour='bg-red-800 glow'
+          colour='white-glow box-glow button-glow'
           // url='test'
         />
         <div className="text-xs">
-          Don't have an account?
+          <span className='glow'>Don't have an account?</span>
           <TextLink
             text="Register"
-            className="text-blue-500 mx-2"
+            className="mx-2 white-glow"
             link="/register"
           />
         </div>
