@@ -16,9 +16,9 @@ function Home() {
           />
       </div>
 
-      <div className="relative flex flex-col items-center justify-center h-full">
+      {/* <div className="relative flex flex-col items-center justify-center h-full"> */}
         <Login />
-      </div>
+      {/* </div> */}
     </div>
   );
 }
