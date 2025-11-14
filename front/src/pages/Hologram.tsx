@@ -26,7 +26,6 @@ const Hologram = (props: Props) => {
   
   useEffect(() => {
     const lines_number = Math.round(props.height / LINES_WIDTH / LINES_GAP);
-    console.log(lines_number);
     for (let i = 0; i < lines_number; i++) {
       const y = i * LINES_WIDTH * LINES_GAP;
       const rect = new Konva.Rect({
