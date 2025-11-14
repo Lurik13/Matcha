@@ -1,5 +1,5 @@
-import Hologram from "$/pages/Hologram";
-import StarsBackground from "$/pages/StarsBackground";
+import Hologram from "$/layers/Hologram";
+import StarsBackground from "$/layers/StarsBackground";
 
 interface Props {
   height: number;
