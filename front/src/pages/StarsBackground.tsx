@@ -1,9 +1,7 @@
 import { Stage, Layer } from 'react-konva';
 import Konva from 'konva';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-let WIDTH = window.innerWidth
-let HEIGHT = window.innerHeight
 const STARS_ANGLE = 0.3;
 
 function getRandomColour() {
@@ -25,10 +23,30 @@ const StarsBackground = () => {
   const stars = useRef<any>(null);
   const space = useRef<any>(null);
   
+  const [dimensions, setDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
   useEffect(() => {
+    const handleResize = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
+  useEffect(() => {
+    space.current?.destroyChildren();
+    stars.current?.destroyChildren();
+
     const rect = new Konva.Rect({
-      width: WIDTH,
-      height: HEIGHT,
+      width: dimensions.width,
+      height: dimensions.height,
       fill: 'black'
     });
     space.current?.add(rect);
@@ -36,8 +54,8 @@ const StarsBackground = () => {
     for (let i = 0; i < 1000; i++) {
       const radius = Math.random() ** 2.5;
       const circle = new Konva.Circle({
-        x: Math.random() * WIDTH,
-        y: Math.random() * HEIGHT,
+        x: Math.random() * dimensions.width,
+        y: Math.random() * dimensions.height,
         radius,
         fill: getRandomColour(),
       });
@@ -51,22 +69,26 @@ const StarsBackground = () => {
         star.x(star.x() - speed);
         star.y(star.y() + speed * STARS_ANGLE);
         if (star.x() < -star_radius) {
-          star.x(WIDTH + star_radius);
+          star.x(dimensions.width + star_radius);
         }
-        if (star.y() > HEIGHT + star_radius) {
+        if (star.y() > dimensions.height + star_radius) {
           star.y(-star_radius);
         }
       });
     }, stars.current)
 
     anim.start();
-    return () => anim.stop();
-  }, [])
+    return () => {
+      anim.stop();
+      space.current?.destroyChildren();
+      stars.current?.destroyChildren();
+    };
+  }, [dimensions])
 
   return (
     <Stage
-      width={WIDTH}
-      height={HEIGHT}
+      width={dimensions.width}
+      height={dimensions.height}
       listening={false}
     >
       <Layer ref={space} />

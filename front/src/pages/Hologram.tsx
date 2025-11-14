@@ -2,30 +2,33 @@ import { Stage, Layer } from 'react-konva';
 import Konva from 'konva';
 import { useEffect, useRef } from 'react';
 
-const WIDTH = 374;
-const HEIGHT = 380;
-const MARGIN = 20;
-const STARS_SPEED = 0.15;
-
-function getOpacity(y: number) {
-  if (y < MARGIN) {
-    return (y) / 100;
-  } else if (y > HEIGHT - MARGIN) {
-    return (HEIGHT - y) / 100;
-  }
-  return 0.2;
+interface Props {
+  width: number;
+  height: number;
 }
 
-const Hologram = () => {
+const MARGIN = 20;
+const LINES_SPEED = 0.15;
+
+const Hologram = (props: Props) => {
   const holo = useRef<any>(null);
+  
+  function getOpacity(y: number) {
+    if (y < MARGIN) {
+      return (y) / 100;
+    } else if (y > props.height - MARGIN) {
+      return (props.height - y) / 100;
+    }
+    return 0.2;
+  }
   
   useEffect(() => {
     for (let i = 0; i < 100; i++) {
-      const y = i * HEIGHT / 100;
+      const y = i * props.height / 100;
       const rect = new Konva.Rect({
         x: 0,
         y: y,
-        width: WIDTH,
+        width: props.width,
         height: 2,
         fill: '#0459c9ff',
         opacity: getOpacity(y),
@@ -37,9 +40,9 @@ const Hologram = () => {
       holo.current?.children?.forEach((line: any) => {
         const y = line.y();
         line.opacity(getOpacity(y));
-        line.y(y + STARS_SPEED);
-        line.width(WIDTH);
-        if (y > HEIGHT) {
+        line.y(y + LINES_SPEED);
+        line.width(props.width);
+        if (y > props.height) {
           line.opacity(0);
           line.y(0);
         }
@@ -53,8 +56,8 @@ const Hologram = () => {
   return (
     <div className="flex justify-center items-center w-full h-full">
       <Stage
-        width={WIDTH}
-        height={HEIGHT}
+        width={props.width}
+        height={props.height}
         listening={false}
       >
         <Layer ref={holo} />
