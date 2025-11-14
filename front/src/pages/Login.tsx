@@ -17,10 +17,10 @@ function Login() {
         <StarsBackground />
       </div>
       <div className="fixed w-full h-full z-20 pointer-events-none">
-          <Hologram 
-            width={374}
-            height={380}
-          />
+        <Hologram 
+          width={374}
+          height={360}
+        />
       </div>
       <div className="relative flex justify-center items-center min-h-screen">
         <div className='text-center max-w-80'>

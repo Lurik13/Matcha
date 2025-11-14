@@ -2,13 +2,15 @@ import { Stage, Layer } from 'react-konva';
 import Konva from 'konva';
 import { useEffect, useRef } from 'react';
 
+const MARGIN = 20;
+const LINES_SPEED = 0.15;
+const LINES_WIDTH = 2;
+const LINES_GAP = 2;
+
 interface Props {
   width: number;
   height: number;
 }
-
-const MARGIN = 20;
-const LINES_SPEED = 0.15;
 
 const Hologram = (props: Props) => {
   const holo = useRef<any>(null);
@@ -23,13 +25,15 @@ const Hologram = (props: Props) => {
   }
   
   useEffect(() => {
-    for (let i = 0; i < 100; i++) {
-      const y = i * props.height / 100;
+    const lines_number = Math.round(props.height / LINES_WIDTH / LINES_GAP);
+    console.log(lines_number);
+    for (let i = 0; i < lines_number; i++) {
+      const y = i * LINES_WIDTH * LINES_GAP;
       const rect = new Konva.Rect({
         x: 0,
         y: y,
         width: props.width,
-        height: 2,
+        height: LINES_WIDTH,
         fill: '#0459c9ff',
         opacity: getOpacity(y),
       });
