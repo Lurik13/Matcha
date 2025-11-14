@@ -43,6 +43,7 @@ const StarsBackground = () => {
   useEffect(() => {
     space.current?.destroyChildren();
     stars.current?.destroyChildren();
+    const stars_number = dimensions.width * dimensions.height * 0.003;
 
     const rect = new Konva.Rect({
       width: dimensions.width,
@@ -51,7 +52,7 @@ const StarsBackground = () => {
     });
     space.current?.add(rect);
   
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < stars_number; i++) {
       const radius = Math.random() ** 2.5;
       const circle = new Konva.Circle({
         x: Math.random() * dimensions.width,
