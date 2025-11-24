@@ -6,16 +6,3 @@ CREATE TABLE IF NOT EXISTS users (
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL
 );
-
-CREATE TABLE IF NOT EXISTS planets (
-    planet_id INT AUTO_INCREMENT PRIMARY KEY,
-
-);
-
-CREATE TABLE IF NOT EXISTS species (
-
-);
-
-CREATE TABLE IF NOT EXISTS tags (
-
-);

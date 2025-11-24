@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
         mysqli \
         zip \
         opcache \
-    && docker-php-ext-enable opcache
+    && docker-php-ext-enable opcache \
+    && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql mysqli
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
