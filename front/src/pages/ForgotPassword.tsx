@@ -8,7 +8,7 @@ function Forgot() {
   const [email, setEmail] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [errors, setErrors] = useState<string | null>(null);
-  const save = useFetch("forgot-password", () => setIsSuccess(true), (err) => setErrors(err));
+  const save = useFetch("forgot_password", () => setIsSuccess(true), (err) => setErrors(err));
   
     const handleClick = () => {
       save.mutate({
@@ -17,11 +17,9 @@ function Forgot() {
     };
 
   return (
-    <Connexion height={280} title={'Forgotten Password'}>
-      {isSuccess ?
-        <p>Email sent</p>
-      :
-        <div>
+    <Connexion height={280} title={isSuccess ? 'Email sent' : 'Forgotten Password'}>
+      {!isSuccess &&
+        <>
           <Input
             value={email}
             label="Email"
@@ -36,7 +34,7 @@ function Forgot() {
             colour='white-glow box-glow button-glow'
             onClick={handleClick}
           />
-        </div>
+        </>
       }
     </Connexion>
   )
