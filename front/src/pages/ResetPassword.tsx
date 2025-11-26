@@ -11,20 +11,20 @@ interface FormFields {
 }
 
 function ResetPassword() {
+  const navigate = useNavigate();
+  const save = useFetch("update_password", () => setIsSuccess(true), (err) => setErrors(err));
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [errors, setErrors] = useState<Array<Error>>([]);
+  
   const [form, setForm] = useState<FormFields>({
       newPassword: "",
       confirmPassword: "",
-    });
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  const [errors, setErrors] = useState<string | null>(null);
+  });
 
   const fields: { key: keyof FormFields; label: string; placeholder?: string }[] = [
     { key: "newPassword", label: "New Password"},
     { key: "confirmPassword", label: "Confirm Password"},
   ];
-
-  const save = useFetch("update_password", () => setIsSuccess(true), (err) => setErrors(err));
-  const navigate = useNavigate();
 
   const handleClick = () => {
     save.mutate({
@@ -37,7 +37,6 @@ function ResetPassword() {
     setForm(prev => ({ ...prev, [key]: value }));
   };
   
-
   return (
     <Connexion height={340} title={isSuccess ? 'Email sent' : 'Reset your password'}>
       {isSuccess ?
@@ -53,12 +52,13 @@ function ResetPassword() {
           {fields.map(f => {
             return (
               <PasswordInput
-              key={f.key} 
-              password={form[f.key]}
-              label={f.label}
-              className="my-5 glow"
-              inputClassName='box-glow'
-              onChange={(e) => handleChange(f.key, e.target.value)}
+                key={f.key} 
+                password={form[f.key]}
+                label={f.label}
+                className="my-5 blue-glow"
+                inputClassName='box-glow'
+                onChange={(e) => handleChange(f.key, e.target.value)}
+                errors={errors}
               />
             );
           })}

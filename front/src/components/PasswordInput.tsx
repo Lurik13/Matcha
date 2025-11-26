@@ -9,6 +9,7 @@ interface Props {
   password: string;
   label: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  errors: Error[];
 }
 
 const PasswordInput = (props: Props) => {
@@ -42,6 +43,9 @@ const PasswordInput = (props: Props) => {
           />
         </div>
       </div>
+    {props.errors.some((e) => e.name === props.label) &&
+      <p className="text-red-500 text-xs flex justify-start red-glow">Forgot password?</p>
+    }
     </div>
   );
 }

@@ -3,7 +3,7 @@ import Input from '$/components/Input'
 import PasswordInput from '$/components/PasswordInput';
 import Button from '$/components/Button';
 import TextLink from '$/components/TextLink';
-import '$/style/text-glow.css';
+import '$/style/text-glow.scss';
 import Connexion from '$/components/Connexion';
 import useFetch from '$/components/useFetch';
 import { useNavigate } from 'react-router-dom';
@@ -14,14 +14,14 @@ interface FormFields {
 }
 
 function Login() {
+  const navigate = useNavigate();
+  const save = useFetch("login", () => navigate("/home"), (err) => setErrors(err));
+  const [errors, setErrors] = useState<Array<Error>>([]);
+  
   const [form, setForm] = useState<FormFields>({
     userName: "",
     password: "",
   });
-  const [errors, setErrors] = useState<string | null>(null);
-  
-  const save = useFetch("login", () => navigate("/home"), (err) => setErrors(err));
-  const navigate = useNavigate();
 
   const handleClick = () => {
     save.mutate({
@@ -32,6 +32,7 @@ function Login() {
 
   const handleChange = (key: string, value: string) => {
     setForm(prev => ({ ...prev, [key]: value }));
+    setErrors(errors.filter(e => e.name !== key));
   };
 
   return (
@@ -41,16 +42,18 @@ function Login() {
         label={"UserName"}
         placeholder="Darth Plagueis"
         type="text"
-        className='glow'
+        className='blue-glow'
         inputClassName='box-glow'
         onChange={(e) => handleChange("userName", e.target.value)}
+        errors={errors}
       />
       <PasswordInput
-        className='mt-5 glow'
+        className='mt-5 blue-glow'
         inputClassName='box-glow'
         password={form.password}
         onChange={(e) => handleChange("password", e.target.value)}
         label="Password"
+        errors={errors}
       />
       <div className='flex justify-end mb-5'>
         <TextLink
@@ -65,7 +68,7 @@ function Login() {
         onClick={handleClick}
       />
       <div className="text-xs">
-        <span className='glow'>Don't have an account?</span>
+        <span className='blue-glow'>Don't have an account?</span>
         <TextLink
           text="Register"
           className="mx-2 white-glow"

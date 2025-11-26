@@ -5,10 +5,10 @@ import Input from '$/components/Input';
 import useFetch from '$/components/useFetch';
 
 function Forgot() {
+  const save = useFetch("forgot_password", () => setIsSuccess(true), (err) => setErrors(err));
   const [email, setEmail] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  const [errors, setErrors] = useState<string | null>(null);
-  const save = useFetch("forgot_password", () => setIsSuccess(true), (err) => setErrors(err));
+  const [errors, setErrors] = useState<Array<Error>>([]);
   
     const handleClick = () => {
       save.mutate({
@@ -25,9 +25,10 @@ function Forgot() {
             label="Email"
             placeholder="example@test.com"
             type="email"
-            className="my-5 glow"
+            className="my-5 blue-glow"
             inputClassName='box-glow'
             onChange={(e) => setEmail(e.target.value)}
+            errors={errors}
           />
           <Button
             text="Confirm"

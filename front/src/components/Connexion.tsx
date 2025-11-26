@@ -21,7 +21,7 @@ function Connexion({ height, title, children }: Props) {
       </div>
       <div className="relative flex justify-center items-center min-h-screen">
         <div className='text-center max-w-80'>
-          <h1 className='text-4xl glow'>{title}</h1>
+          <h1 className='text-4xl blue-glow'>{title}</h1>
           {children}
         </div>
       </div>

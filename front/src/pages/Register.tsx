@@ -17,6 +17,10 @@ interface FormFields {
 }
 
 function Register() {
+  const navigate = useNavigate();
+  const save = useFetch("register", () => navigate("/login"), (err) => setErrors(err));
+  const [errors, setErrors] = useState<Array<Error>>([]);
+  
   const [form, setForm] = useState<FormFields>({
     userName: "",
     firstName: "",
@@ -25,7 +29,6 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
-  const [errors, setErrors] = useState<string | null>(null);
 
   const fields: { key: keyof FormFields; label: string; placeholder?: string; type: string }[] = [
     { key: "userName", label: "User Name", placeholder: "Darth Plagueis", type: "text" },
@@ -35,9 +38,6 @@ function Register() {
     { key: "password", label: "Password", type: "password" },
     { key: "confirmPassword", label: "Confirm Password", type: "password" },
   ];
-
-  const save = useFetch("register", () => navigate("/login"), (err) => setErrors(err));
-  const navigate = useNavigate();
 
   const handleClick = () => {
     save.mutate({
@@ -63,9 +63,10 @@ function Register() {
               key={f.key}
               password={form[f.key]}
               label={f.label}
-              className="my-5 glow"
+              className="my-5 blue-glow"
               inputClassName="box-glow"
               onChange={(e) => handleChange(f.key, e.target.value)}
+              errors={errors}
             />
           );
         }
@@ -76,9 +77,10 @@ function Register() {
             label={f.label}
             placeholder={f.placeholder}
             type={f.type}
-            className="glow"
+            className="blue-glow"
             inputClassName="box-glow"
             onChange={(e) => handleChange(f.key, e.target.value)}
+            errors={errors}
           />
         );
       })}
@@ -88,7 +90,7 @@ function Register() {
         onClick={handleClick}
       />
       <div className="text-xs">
-        <span className='glow'>Already have an account?</span>
+        <span className='blue-glow'>Already have an account?</span>
         <TextLink
           text="Login"
           className="mx-2 white-glow"
