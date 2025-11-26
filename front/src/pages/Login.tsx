@@ -6,7 +6,6 @@ import TextLink from '$/components/TextLink';
 import '$/style/text-glow.css';
 import Connexion from '$/components/Connexion';
 import useFetch from '$/components/useFetch';
-import { apiUrl } from '$/helper';
 import { useNavigate } from 'react-router-dom';
 
 interface FormFields {
@@ -19,18 +18,9 @@ function Login() {
     userName: "",
     password: "",
   });
-
-  const save = useFetch(
-    apiUrl("login"),
-    {
-      onSuccess: () => {
-        navigate("/home");
-      },
-      onError: (err) => {
-        console.log("Erreur côté registre :", err);
-      }
-    }
-  );
+  const [errors, setErrors] = useState<string | null>(null);
+  
+  const save = useFetch("login", () => navigate("/home"), (err) => setErrors(err));
   const navigate = useNavigate();
 
   const handleClick = () => {

@@ -1,25 +1,43 @@
 import { useState } from 'react'
 import Button from '$/components/Button';
-import PasswordInput from '$/components/PasswordInput';
 import Connexion from '$/components/Connexion';
+import Input from '$/components/Input';
+import useFetch from '$/components/useFetch';
 
 function Forgot() {
-  const [email, setEmail] = useState<string | null>(null);
+  const [email, setEmail] = useState<string>("");
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [errors, setErrors] = useState<string | null>(null);
+  const save = useFetch("forgot-password", () => setIsSuccess(true), (err) => setErrors(err));
+  
+    const handleClick = () => {
+      save.mutate({
+        email: email,
+      });
+    };
 
   return (
     <Connexion height={280} title={'Forgotten Password'}>
-      <PasswordInput
-        className="my-5 glow"
-        inputClassName='box-glow'
-        password={email}
-        setPassword={setEmail}
-        label="Email"
-      />
-      <Button
-        text="Confirm"
-        colour='white-glow box-glow button-glow'
-        route='/reset-password'
-      />
+      {isSuccess ?
+        <p>Email sent</p>
+      :
+        <div>
+          <Input
+            value={email}
+            label="Email"
+            placeholder="example@test.com"
+            type="email"
+            className="my-5 glow"
+            inputClassName='box-glow'
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Button
+            text="Confirm"
+            colour='white-glow box-glow button-glow'
+            onClick={handleClick}
+          />
+        </div>
+      }
     </Connexion>
   )
 }

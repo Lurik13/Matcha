@@ -1,18 +1,14 @@
+import { apiUrl } from "$/helper";
 import { useMutation } from "@tanstack/react-query";
 
 export default function useFetch(
   url: string,
-  {
-    onSuccess,
-    onError,
-  }: {
-    onSuccess?: (data: any) => void;
-    onError?: (error: any) => void;
-  } = {}
+  onSuccess?: (data: any) => void,
+  onError?: (error: any) => void,
 ) {
   return useMutation({
     mutationFn: async (body: any) => {
-      const res = await fetch(url, {
+      const res = await fetch(apiUrl(url), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -6,7 +6,6 @@ import TextLink from '$/components/TextLink';
 import Connexion from '$/components/Connexion';
 import { useNavigate } from 'react-router-dom';
 import useFetch from '$/components/useFetch';
-import { apiUrl } from '$/helper';
 
 interface FormFields {
   userName: string;
@@ -26,6 +25,7 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
+  const [errors, setErrors] = useState<string | null>(null);
 
   const fields: { key: keyof FormFields; label: string; placeholder?: string; type: string }[] = [
     { key: "userName", label: "User Name", placeholder: "Darth Plagueis", type: "text" },
@@ -36,17 +36,7 @@ function Register() {
     { key: "confirmPassword", label: "Confirm Password", type: "password" },
   ];
 
-  const save = useFetch(
-    apiUrl("register"),
-    {
-      onSuccess: () => {
-        navigate("/login");
-      },
-      onError: (err) => {
-        console.log("Erreur côté registre :", err);
-      }
-    }
-  );
+  const save = useFetch("register", () => navigate("/login"), (err) => setErrors(err));
   const navigate = useNavigate();
 
   const handleClick = () => {
