@@ -8,13 +8,34 @@ import { useNavigate } from 'react-router-dom';
 import useFetch from '$/components/useFetch';
 import { apiUrl } from '$/helper';
 
+interface FormFields {
+  userName: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 function Register() {
-  const [userName, setUserName] = useState<string | null>(null);
-  const [firstName, setFirstName] = useState<string | null>(null);
-  const [lastName, setLastName] = useState<string | null>(null);
-  const [email, setEmail] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
-  const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
+  const [form, setForm] = useState<FormFields>({
+    userName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const fields: { key: keyof FormFields; label: string; placeholder?: string; type: string }[] = [
+    { key: "userName", label: "User Name", placeholder: "Darth Plagueis", type: "text" },
+    { key: "firstName", label: "First Name", placeholder: "Hego", type: "text" },
+    { key: "lastName", label: "Last Name", placeholder: "Damask", type: "text" },
+    { key: "email", label: "Email", placeholder: "example@test.com", type: "email" },
+    { key: "password", label: "Password", type: "password" },
+    { key: "confirmPassword", label: "Confirm Password", type: "password" },
+  ];
+
   const save = useFetch(
     apiUrl("register"),
     {
@@ -30,66 +51,47 @@ function Register() {
 
   const handleClick = () => {
     save.mutate({
-      username: userName,
-      email,
-      password,
-      firstname: firstName,
-      lastname: lastName,
+      username: form.userName,
+      email: form.email,
+      password: form.password,
+      confirmPassword: form.confirmPassword,
+      firstname: form.firstName,
+      lastname: form.lastName,
     });
+  };
+
+  const handleChange = (key: string, value: string) => {
+    setForm(prev => ({ ...prev, [key]: value }));
   };
 
   return (
     <Connexion height={552} title='Register'>
-      <Input
-        value={userName}
-        label={"UserName"}
-        placeholder="Darth Plagueis"
-        type="text"
-        className='glow'
-        inputClassName='box-glow'
-        onChange={(e) => setUserName(e.target.value)}
-      />
-      <Input
-        value={firstName}
-        label={"First Name"}
-        placeholder="Hego"
-        type="text"
-        className='glow'
-        inputClassName='box-glow'
-        onChange={(e) => setFirstName(e.target.value)}
-      />
-      <Input
-        value={lastName}
-        label={"Last Name"}
-        placeholder="Damask"
-        type="text"
-        className='glow'
-        inputClassName='box-glow'
-        onChange={(e) => setLastName(e.target.value)}
-      />
-      <Input
-        value={email}
-        label={"Email"}
-        placeholder="example@test.com"
-        type="email"
-        className='glow'
-        inputClassName='box-glow'
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <PasswordInput
-        className="my-5 glow"
-        inputClassName='box-glow'
-        password={password}
-        setPassword={setPassword}
-        label="Password"
-      />
-      <PasswordInput
-        className="my-5 glow"
-        inputClassName='box-glow'
-        password={confirmPassword}
-        setPassword={setConfirmPassword}
-        label="Confirm password"
-      />
+      {fields.map(f => {
+        if (f.type === "password") {
+          return (
+            <PasswordInput
+              key={f.key}
+              password={form[f.key]}
+              label={f.label}
+              className="my-5 glow"
+              inputClassName="box-glow"
+              onChange={(e) => handleChange(f.key, e.target.value)}
+            />
+          );
+        }
+        return (
+          <Input
+            key={f.key}
+            value={form[f.key]}
+            label={f.label}
+            placeholder={f.placeholder}
+            type={f.type}
+            className="glow"
+            inputClassName="box-glow"
+            onChange={(e) => handleChange(f.key, e.target.value)}
+          />
+        );
+      })}
       <Button
         text="Register"
         colour='white-glow box-glow button-glow'

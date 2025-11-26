@@ -9,9 +9,17 @@ import useFetch from '$/components/useFetch';
 import { apiUrl } from '$/helper';
 import { useNavigate } from 'react-router-dom';
 
+interface FormFields {
+  userName: string;
+  password: string;
+}
+
 function Login() {
-  const [userName, setUserName] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
+  const [form, setForm] = useState<FormFields>({
+    userName: "",
+    password: "",
+  });
+
   const save = useFetch(
     apiUrl("login"),
     {
@@ -27,26 +35,31 @@ function Login() {
 
   const handleClick = () => {
     save.mutate({
-      username: userName,
-      password,
+      username: form.userName,
+      password: form.password,
     });
   };
+
+  const handleChange = (key: string, value: string) => {
+    setForm(prev => ({ ...prev, [key]: value }));
+  };
+
   return (
     <Connexion height={320} title='Login'>
       <Input
-        value={userName}
+        value={form.userName}
         label={"UserName"}
         placeholder="Darth Plagueis"
         type="text"
         className='glow'
         inputClassName='box-glow'
-        onChange={(e) => setUserName(e.target.value)}
+        onChange={(e) => handleChange("userName", e.target.value)}
       />
       <PasswordInput
         className='mt-5 glow'
         inputClassName='box-glow'
-        password={password}
-        setPassword={setPassword}
+        password={form.password}
+        onChange={(e) => handleChange("password", e.target.value)}
         label="Password"
       />
       <div className='flex justify-end mb-5'>
@@ -60,7 +73,6 @@ function Login() {
         text="Login"
         colour='white-glow box-glow button-glow'
         onClick={handleClick}
-        // url='test'
       />
       <div className="text-xs">
         <span className='glow'>Don't have an account?</span>

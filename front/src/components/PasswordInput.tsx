@@ -1,4 +1,4 @@
-import { useState, type Dispatch, type SetStateAction } from 'react';
+import { useState } from 'react';
 import Fulcrum from '$/assets/Fulcrum.png'
 import JaigEyes from '$/assets/JaigEyes.png'
 import ImageBoolean from '$/components/ImageBoolean';
@@ -6,18 +6,14 @@ import ImageBoolean from '$/components/ImageBoolean';
 interface Props {
   className: string;
   inputClassName?: string;
-  password: string | null;
+  password: string;
   label: string;
-  setPassword: Dispatch<SetStateAction<string | null>>;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PasswordInput = (props: Props) => {
   const [isHiddenPassword, setIsHiddenPassword] = useState<boolean>(true);
   
-  const handlePasswordChange =  (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.setPassword(event.target.value);
-  }
-
   return (
     <div className={props.className}>
       <label 
@@ -35,7 +31,7 @@ const PasswordInput = (props: Props) => {
           value={props.password ? props.password : ""}
           type={isHiddenPassword ? "password" : "text"}
           className='flex-grow-200 px-1'
-          onChange={handlePasswordChange}
+          onChange={props.onChange}
         />
         <div className='border-l flex-grow-1'>
           <ImageBoolean
