@@ -46,7 +46,10 @@ class UserController extends AbstractController
 
         try {
             $this->userModel->registerUser($username, $email, $password, $firstname, $lastname);
-            return new Response("User registered successfully", 201);
+            return $this->json(
+                ['message' => 'User registered successfully'],
+                201
+            );
         } catch (\Exception $e) {
             return new Response($e->getMessage(), 400);
         }
@@ -66,7 +69,10 @@ class UserController extends AbstractController
 
         try {
             $user = $this->userModel->loginUser($username, $password);
-            return new Response("Login successful. Welcome, {$user['firstname']}!");
+            return $this->json(
+                ['message' => "Login successful. Welcome, {$user['firstname']}!"],
+                201
+            );
         } catch (\Exception $e) {
             return new Response($e->getMessage(), 401);
         }

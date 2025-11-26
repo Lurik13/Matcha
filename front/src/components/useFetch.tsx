@@ -1,11 +1,34 @@
-export default async function useFetch(url: string) {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("API error");
-    return await res.json();
-  } catch (err) {
-    console.error(err);
-    return err;
-  }
-}
+import { useMutation } from "@tanstack/react-query";
 
+export default function useFetch(
+  url: string,
+  {
+    onSuccess,
+    onError,
+  }: {
+    onSuccess?: (data: any) => void;
+    onError?: (error: any) => void;
+  } = {}
+) {
+  return useMutation({
+    mutationFn: async (body: any) => {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ message: "Unknown error"}));
+        console.log("error:", err);
+        throw err;
+      }
+      
+      console.log("res", res);
+      return res.json();
+    },
+
+    onSuccess,
+    onError,
+  });
+}

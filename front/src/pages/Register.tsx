@@ -4,6 +4,9 @@ import PasswordInput from '$/components/PasswordInput';
 import Button from '$/components/Button';
 import TextLink from '$/components/TextLink';
 import Connexion from '$/components/Connexion';
+import { useNavigate } from 'react-router-dom';
+import useFetch from '$/components/useFetch';
+import { apiUrl } from '$/helper';
 
 function Register() {
   const [userName, setUserName] = useState<string | null>(null);
@@ -12,6 +15,28 @@ function Register() {
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
+  const save = useFetch(
+    apiUrl("register"),
+    {
+      onSuccess: () => {
+        navigate("/login");
+      },
+      onError: (err) => {
+        console.log("Erreur côté registre :", err);
+      }
+    }
+  );
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    save.mutate({
+      username: userName,
+      email,
+      password,
+      firstname: firstName,
+      lastname: lastName,
+    });
+  };
 
   return (
     <Connexion height={552} title='Register'>
@@ -68,7 +93,7 @@ function Register() {
       <Button
         text="Register"
         colour='white-glow box-glow button-glow'
-        // url='test'
+        onClick={handleClick}
       />
       <div className="text-xs">
         <span className='glow'>Already have an account?</span>

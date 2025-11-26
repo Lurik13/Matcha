@@ -1,27 +1,16 @@
-import useFetch from '$/components/useFetch'
-import { useNavigate } from 'react-router-dom';
-
 interface Props {
   text: string;
   colour: string;
   route?: string;
   className?: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
 const Button = (props: Props) => {
-  const navigate = useNavigate();
-  
-  const handleClick = async () => {
-    const data = await useFetch("https://api.github.com/users/Lurik13");
-    if (data.login == "Lurik13" && props.route) {
-      navigate(props.route);
-    }
-  };
-
   return (
     <div 
       className={`${props.colour} ${props.className} cursor-pointer select-none`}
-      onClick={handleClick}
+      onClick={props.onClick}
     >
       {props.text}
     </div>

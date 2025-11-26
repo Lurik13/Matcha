@@ -5,11 +5,32 @@ import Button from '$/components/Button';
 import TextLink from '$/components/TextLink';
 import '$/style/text-glow.css';
 import Connexion from '$/components/Connexion';
+import useFetch from '$/components/useFetch';
+import { apiUrl } from '$/helper';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [userName, setUserName] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
+  const save = useFetch(
+    apiUrl("login"),
+    {
+      onSuccess: () => {
+        navigate("/home");
+      },
+      onError: (err) => {
+        console.log("Erreur côté registre :", err);
+      }
+    }
+  );
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    save.mutate({
+      username: userName,
+      password,
+    });
+  };
   return (
     <Connexion height={320} title='Login'>
       <Input
@@ -38,6 +59,7 @@ function Login() {
       <Button
         text="Login"
         colour='white-glow box-glow button-glow'
+        onClick={handleClick}
         // url='test'
       />
       <div className="text-xs">
