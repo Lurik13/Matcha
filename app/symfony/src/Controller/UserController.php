@@ -24,10 +24,10 @@ class UserController extends AbstractController
         $user = $this->userModel->getUserById($id);
 
         if (!$user) {
-            return new Response("User not found", 404);
+            return $this->json(['error' => 'User not found'], 404);
         }
 
-        return new Response("User ID: {$user['user_id']}, Username: {$user['username']}");
+        return $this->json($user);
     }
 
     #[Route('/register', name : 'register', methods : ['POST'])]
@@ -41,17 +41,14 @@ class UserController extends AbstractController
         $lastname = trim(htmlspecialchars($data['lastname'] ?? null));
 
         if (!$username || !$email || !$password || !$firstname || !$lastname) {
-            return new Response("Missing required fields", 400);
+            return $this->json(['error' => 'Missing required fields'], 400);
         }
 
         try {
             $this->userModel->registerUser($username, $email, $password, $firstname, $lastname);
-            return $this->json(
-                ['message' => 'User registered successfully'],
-                201
-            );
+            return $this->json(['message' => 'User registered successfully'], 201);
         } catch (\Exception $e) {
-            return new Response($e->getMessage(), 400);
+            return $this->json(['error' => $e->getMessage()], 400);
         }
 
     }
@@ -64,17 +61,14 @@ class UserController extends AbstractController
         $password = trim(htmlspecialchars($data['password'] ?? null));
 
         if (!$username || !$password) {
-            return new Response("Missing username or password", 400);
+            return $this->json(['error' => 'Missing username or password'], 400);
         }
 
         try {
             $user = $this->userModel->loginUser($username, $password);
-            return $this->json(
-                ['message' => "Login successful. Welcome, {$user['firstname']}!"],
-                201
-            );
+            return $this->json(['message' => "Login successful. Welcome, {$user['firstname']}!"], 201);
         } catch (\Exception $e) {
-            return new Response($e->getMessage(), 401);
+            return $this->json(['error' => $e->getMessage()], 401);
         }
     }
 
@@ -85,12 +79,12 @@ class UserController extends AbstractController
         $newPassword = trim(htmlspecialchars($data['password'] ?? null));
 
         if (!$newPassword) {
-            return new Response("Missing new password", 400);
+            return $this->json(['error' => 'Missing new password'], 400);
         }
 
         $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
         $this->userModel->updatePassword($hashedPassword, $id);
 
-        return new Response("Password updated successfully");
+        return $this->json(['message' => 'Password updated successfully']);
     }
 }
