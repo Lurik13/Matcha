@@ -29,7 +29,9 @@ function Input (props: Props) {
         onChange={props.onChange}
       />
       {error &&
-        <p className="text-red-500 text-xs flex justify-start red-glow">{error}</p>
+        <p className="text-red-500 text-xs flex justify-start red-glow">
+          {error}
+        </p>
       }
     </div>
   );

@@ -1,12 +1,12 @@
 import '$/components/hologram.css'
 import Connexion from '$/components/Connexion';
 
-function Home() {
+function PageNotFound() {
   return (
-    <Connexion height={380} title='Logged in'>
-      Blablabla
+    <Connexion height={380} title='404 not found'>
+      .
     </Connexion>
   );
 }
 
-export default Home;
+export default PageNotFound;

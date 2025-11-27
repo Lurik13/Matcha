@@ -8,7 +8,7 @@ import Login from './pages/Login.tsx'
 import Register from './pages/Register.tsx'
 import ForgotPassword from './pages/ForgotPassword.tsx'
 import ResetPassword from './pages/ResetPassword.tsx'
-import Home from './pages/Home.tsx'
+import PageNotFound from './pages/PageNotFound.tsx'
 
 const queryClient = new QueryClient()
 
@@ -22,7 +22,7 @@ createRoot(root).render(
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
