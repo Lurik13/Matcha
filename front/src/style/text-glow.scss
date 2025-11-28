@@ -1,7 +1,11 @@
-.glow {
-  color: var(--turquoise);
+.simple-glow {
   text-align: center;
   opacity: 0.7;
+}
+
+.blue-glow {
+  @extend .simple-glow;
+  color: var(--turquoise);
   text-shadow: 
     0 0 10px var(--turquoise),
     0 0 20px var(--turquoise),
@@ -13,9 +17,8 @@
 }
 
 .white-glow {
+  @extend .simple-glow;
   color: var(--bleu-tres-clair);
-  text-align: center;
-  opacity: 0.7;
   text-shadow: 
     0 0 10px var(--bleu-tres-clair),
     0 0 20px var(--bleu-tres-clair),
@@ -24,6 +27,19 @@
     0 0 50px var(--bleu-clair),
     0 0 60px var(--bleu-clair),
     0 0 70px var(--bleu-clair);
+}
+
+.red-glow {
+  @extend .simple-glow;
+  color: var(--rouge-clair);
+  text-shadow: 
+    0 0 10px var(--rouge-clair),
+    0 0 20px var(--rouge-clair),
+    0 0 30px var(--rouge-clair),
+    0 0 40px var(--rouge-clair),
+    0 0 50px var(--rouge-tres-clair),
+    0 0 60px var(--rouge-tres-clair),
+    0 0 70px var(--rouge-tres-clair);
 }
 
 .box-glow {

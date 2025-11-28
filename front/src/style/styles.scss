@@ -1,0 +1,16 @@
+@import './text-glow';
+
+.languageButton {
+  @extend .white-glow;
+  @extend .button-glow;
+  position: fixed;
+  bottom: 0;
+  width: 3.75rem;
+  height: 3.75rem;
+  align-items: center;
+  margin: 1.25rem;
+  padding-top: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  z-index: 30;
+}
