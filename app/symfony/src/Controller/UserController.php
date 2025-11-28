@@ -50,7 +50,6 @@ class UserController extends AbstractController
         } catch (\Exception $e) {
             return $this->json(['error' => $e->getMessage()], 400);
         }
-
     }
 
     #[Route('/login', name : 'login', methods : ['POST'])]
