@@ -5,7 +5,7 @@ import Button from '$/components/Button';
 import TextLink from '$/components/TextLink';
 import '$/style/text-glow.scss';
 import Connexion from '$/components/Connexion';
-import useFetch from '$/components/useFetch';
+import useFetch from '$/hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
 
 interface FormFields {

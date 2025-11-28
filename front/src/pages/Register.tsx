@@ -5,7 +5,7 @@ import Button from '$/components/Button';
 import TextLink from '$/components/TextLink';
 import Connexion from '$/components/Connexion';
 import { useNavigate } from 'react-router-dom';
-import useFetch from '$/components/useFetch';
+import useFetch from '$/hooks/useFetch';
 
 interface FormFields {
   userName: string;

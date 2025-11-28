@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Button from '$/components/Button';
 import Connexion from '$/components/Connexion';
 import Input from '$/components/Input';
-import useFetch from '$/components/useFetch';
+import useFetch from '$/hooks/useFetch';
 
 function Forgot() {
   const save = useFetch("forgot_password", () => setIsSuccess(true), (err) => setErrors(err));

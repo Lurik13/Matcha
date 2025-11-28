@@ -1,4 +1,4 @@
-import '$/components/hologram.css'
+import '$/style/hologram.scss'
 import Connexion from '$/components/Connexion';
 
 function PageNotFound() {

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Button from '$/components/Button';
 import PasswordInput from '$/components/PasswordInput';
 import Connexion from '$/components/Connexion';
-import useFetch from '$/components/useFetch';
+import useFetch from '$/hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
 
 interface FormFields {
