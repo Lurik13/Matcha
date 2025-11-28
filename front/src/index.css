@@ -5,6 +5,12 @@
   src: url(./assets/Aurebesh.otf);
 }
 
+@font-face {
+  font-family: Latin;
+  src: url(./assets/pbio-bold.ttf);
+  size-adjust: 70%;
+}
+
 :root {
   --turquoise: #59d9f1;
   --bleu-clair: #2873ce;
@@ -12,8 +18,13 @@
   --bleu-clair-transparent: #2873ce75;
   --rouge-clair: #ff3a3a;
   --rouge-tres-clair: #ffbebe;
+}
 
+body {
   font-family: Aurebesh;
-  line-height: 1.5;
-  font-weight: 100;
+}
+
+body.latin-mode {
+  font-family: Latin;
+  letter-spacing: 2.2px;
 }
