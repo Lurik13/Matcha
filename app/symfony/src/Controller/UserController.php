@@ -18,13 +18,33 @@ class UserController extends AbstractController
         $this->userModel = new User($db);
     }
 
+    private function error(string $name, string $message, int $status): Response
+    {
+        return $this->json([
+            'error' => [
+                'name' => $name,
+                'message' => $message
+            ]
+        ], $status);
+    }
+
+    private function success(string $name, string $message, int $status): Response
+    {
+        return $this->json([
+            'success' => [
+                'name' => $name,
+                'message' => $message
+            ]
+        ], $status);
+    }
+
     #[Route('/user/{id}', name: 'get_user', methods: ['GET'])]
     public function getUserId(int $id): Response
     {
         $user = $this->userModel->getUserById($id);
 
         if (!$user) {
-            return $this->json(['error' => 'User not found'], 404);
+            return $this->error('User', 'User not found', 404);
         }
 
         return $this->json($user);
@@ -40,15 +60,27 @@ class UserController extends AbstractController
         $firstname = trim(htmlspecialchars($data['firstname'] ?? null));
         $lastname = trim(htmlspecialchars($data['lastname'] ?? null));
 
-        if (!$username || !$email || !$password || !$firstname || !$lastname) {
-            return $this->json(['error' => 'Missing required fields'], 400);
+        if (!$username) {
+            return $this->error('Username', 'Missing username', 400);
+        }
+        if (!$email) {
+            return $this->error('Email', 'Missing email', 400);
+        }
+        if (!$password) {
+            return $this->error('Password', 'Missing password', 400);
+        }
+        if (!$firstname) {
+            return $this->error('First Name', 'Missing first name', 400);
+        }
+        if (!$lastname) {
+            return $this->error('Last Name', 'Missing last name', 400);
         }
 
         try {
             $this->userModel->registerUser($username, $email, $password, $firstname, $lastname);
-            return $this->json(['message' => 'User registered successfully'], 201);
+            return $this->success('Register', 'User registered successfully', 201);
         } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], 400);
+            return $this->error('Register', $e->getMessage(), 400);
         }
 
     }
@@ -60,15 +92,18 @@ class UserController extends AbstractController
         $username = trim(htmlspecialchars($data['username'] ?? null));
         $password = trim(htmlspecialchars($data['password'] ?? null));
 
-        if (!$username || !$password) {
-            return $this->json(['error' => 'Missing username or password'], 400);
+        if (!$username) {
+            return $this->error('Username', 'Missing username', 400);
+        }
+        if (!$password) {
+            return $this->error('Password', 'Missing password', 400);
         }
 
         try {
             $user = $this->userModel->loginUser($username, $password);
-            return $this->json(['message' => "Login successful. Welcome, {$user['firstname']}!"], 201);
+            return $this->success('Login', "Login successful. Welcome, {$user['firstname']}!", 201);
         } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], 401);
+            return $this->error('Login', $e->getMessage(), 401);
         }
     }
 
@@ -79,12 +114,12 @@ class UserController extends AbstractController
         $newPassword = trim(htmlspecialchars($data['password'] ?? null));
 
         if (!$newPassword) {
-            return $this->json(['error' => 'Missing new password'], 400);
+            return $this->error('Password', 'Missing new password', 400);
         }
 
         $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
         $this->userModel->updatePassword($hashedPassword, $id);
 
-        return $this->json(['message' => 'Password updated successfully']);
+        return $this->success('Password', 'Password updated successfully', 200);
     }
 }
