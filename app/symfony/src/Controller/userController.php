@@ -79,7 +79,7 @@ class userController extends AbstractController
 
         try {
             $this->userModel->registerUser($username, $email, $password, $firstname, $lastname);
-            return $this->success('Register', 'User registered successfully', 201);
+            return $this->success('register', 'User registered successfully', 201);
         } catch (apiException $e) {
             return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
         }
@@ -103,7 +103,7 @@ class userController extends AbstractController
 
         try {
             $user = $this->userModel->loginUser($username, $password);
-            return $this->success('Login', "Login successful. Welcome, {$user['firstname']}!", 201);
+            return $this->success('login', "Login successful. Welcome, {$user['firstname']}!", 201);
         } catch (apiException $e) {
             return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
         }
@@ -121,9 +121,8 @@ class userController extends AbstractController
         }
 
         try {
-            $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
-            $this->userModel->updatePassword($hashedPassword, $id);
-            return $this->success('Update Password', 'Password updated successfully', 200);
+            $this->userModel->updatePassword($newPassword, $id);
+            return $this->success('update password', 'Password updated successfully', 200);
         } catch (apiException $e) {
             return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
         }
