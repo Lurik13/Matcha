@@ -55,11 +55,11 @@ class UserController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        $username = trim(htmlspecialchars($data['username'] ?? null));
-        $email = trim(htmlspecialchars($data['email'] ?? null));
-        $password = trim(htmlspecialchars($data['password'] ?? null));
-        $firstname = trim(htmlspecialchars($data['firstname'] ?? null));
-        $lastname = trim(htmlspecialchars($data['lastname'] ?? null));
+        $username = trim($data['username'] ?? null);
+        $email = trim($data['email'] ?? null);
+        $password = trim($data['password'] ?? null);
+        $firstname = trim($data['firstname'] ?? null);
+        $lastname = trim($data['lastname'] ?? null);
 
         if (!$username) {
             return $this->error('Username', 'Missing username', 400);
@@ -91,8 +91,8 @@ class UserController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        $username = trim(htmlspecialchars($data['username'] ?? null));
-        $password = trim(htmlspecialchars($data['password'] ?? null));
+        $username = trim($data['username'] ?? null);
+        $password = trim($data['password'] ?? null);
 
         if (!$username) {
             return $this->error('Username', 'Missing username', 400);
@@ -114,7 +114,7 @@ class UserController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        $newPassword = trim(htmlspecialchars($data['password'] ?? null));
+        $newPassword = trim($data['password'] ?? null);
 
         if (!$newPassword) {
             return $this->error('Password', 'Missing new password', 400);
