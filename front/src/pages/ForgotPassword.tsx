@@ -5,10 +5,10 @@ import Input from '$/components/Input';
 import useFetch from '$/hooks/useFetch';
 
 function Forgot() {
+  const [errors, setErrors] = useState<Array<Error>>([]);
   const save = useFetch("forgot_password", () => setIsSuccess(true), (err) => setErrors(err));
   const [email, setEmail] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  const [errors, setErrors] = useState<Array<Error>>([]);
   
     const handleClick = () => {
       save.mutate({

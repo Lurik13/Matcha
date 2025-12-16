@@ -3,7 +3,7 @@ import Connexion from '$/components/Connexion';
 
 function PageNotFound() {
   return (
-    <Connexion width={innerWidth} height={innerHeight} title='404 not found' children={null}/>
+    <Connexion width={innerWidth} height={innerHeight} title='404 not found' children={null} />
   );
 }
 

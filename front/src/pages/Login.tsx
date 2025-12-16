@@ -14,9 +14,9 @@ interface FormFields {
 }
 
 function Login() {
+  const [errors, setErrors] = useState<Array<Error>>([]);
   const navigate = useNavigate();
   const save = useFetch("login", () => navigate("/home"), (err) => setErrors(err));
-  const [errors, setErrors] = useState<Array<Error>>([]);
   
   const [form, setForm] = useState<FormFields>({
     userName: "",

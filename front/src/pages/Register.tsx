@@ -17,9 +17,9 @@ interface FormFields {
 }
 
 function Register() {
-  const navigate = useNavigate();
-  const save = useFetch("register", () => navigate("/login"), (err) => setErrors(err));
   const [errors, setErrors] = useState<Array<Error>>([]);
+  const navigate = useNavigate();
+  const save = useFetch("register", () => navigate("/settings"), (err) => setErrors(err));
   
   const [form, setForm] = useState<FormFields>({
     userName: "",

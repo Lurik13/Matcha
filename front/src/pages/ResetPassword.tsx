@@ -11,10 +11,10 @@ interface FormFields {
 }
 
 function ResetPassword() {
+  const [errors, setErrors] = useState<Array<Error>>([]);
   const navigate = useNavigate();
   const save = useFetch("update_password", () => setIsSuccess(true), (err) => setErrors(err));
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  const [errors, setErrors] = useState<Array<Error>>([]);
   
   const [form, setForm] = useState<FormFields>({
       newPassword: "",
