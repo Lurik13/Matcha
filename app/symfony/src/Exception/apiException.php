@@ -4,7 +4,7 @@ namespace App\Exception;
 
 use Exception;
 
-class ApiException extends Exception
+class apiException extends Exception
 {
 
     private string $name;

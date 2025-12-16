@@ -1,8 +1,8 @@
 <?php
 namespace App\Controller;
 
-use App\Exception\ApiException;
-use App\Model\User;
+use App\Exception\apiException;
+use App\Model\user;
 use App\Service\Database;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/api')]
-class UserController extends AbstractController
+class userController extends AbstractController
 {
     private $userModel;
 
@@ -45,7 +45,7 @@ class UserController extends AbstractController
         try {
             $user = $this->userModel->getUserById($id);
             return $this->json($user);
-        } catch (ApiException $e) {
+        } catch (apiException $e) {
             return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
         }
     }
@@ -62,25 +62,25 @@ class UserController extends AbstractController
         $lastname = trim($data['lastname'] ?? null);
 
         if (!$username) {
-            return $this->error('Username', 'Missing username', 400);
+            return $this->error('username', 'Missing username', 400);
         }
         if (!$email) {
-            return $this->error('Email', 'Missing email', 400);
+            return $this->error('email', 'Missing email', 400);
         }
         if (!$password) {
-            return $this->error('Password', 'Missing password', 400);
+            return $this->error('password', 'Missing password', 400);
         }
         if (!$firstname) {
-            return $this->error('First Name', 'Missing first name', 400);
+            return $this->error('firstname', 'Missing firstname', 400);
         }
         if (!$lastname) {
-            return $this->error('Last Name', 'Missing last name', 400);
+            return $this->error('lastname', 'Missing lastname', 400);
         }
 
         try {
             $this->userModel->registerUser($username, $email, $password, $firstname, $lastname);
             return $this->success('Register', 'User registered successfully', 201);
-        } catch (ApiException $e) {
+        } catch (apiException $e) {
             return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
         }
 
@@ -95,16 +95,16 @@ class UserController extends AbstractController
         $password = trim($data['password'] ?? null);
 
         if (!$username) {
-            return $this->error('Username', 'Missing username', 400);
+            return $this->error('username', 'Missing username', 400);
         }
         if (!$password) {
-            return $this->error('Password', 'Missing password', 400);
+            return $this->error('password', 'Missing password', 400);
         }
 
         try {
             $user = $this->userModel->loginUser($username, $password);
             return $this->success('Login', "Login successful. Welcome, {$user['firstname']}!", 201);
-        } catch (ApiException $e) {
+        } catch (apiException $e) {
             return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
         }
     }
@@ -117,14 +117,14 @@ class UserController extends AbstractController
         $newPassword = trim($data['password'] ?? null);
 
         if (!$newPassword) {
-            return $this->error('Password', 'Missing new password', 400);
+            return $this->error('password', 'Missing new password', 400);
         }
 
         try {
             $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
             $this->userModel->updatePassword($hashedPassword, $id);
             return $this->success('Update Password', 'Password updated successfully', 200);
-        } catch (ApiException $e) {
+        } catch (apiException $e) {
             return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
         }
     }

@@ -4,9 +4,9 @@ namespace App\Model;
 
 Use PDO;
 Use App\Service\Database;
-Use App\Exception\ApiException;
+Use App\Exception\apiException;
 
-class User
+class user
 {
     private $pdo;
 
@@ -21,7 +21,7 @@ class User
         $stmt->execute([$id]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$user) {
-            throw new ApiException('User', 'User not found.', 404);
+            throw new apiException('user', 'User not found.', 404);
         }
         return $user;
     }
@@ -33,7 +33,7 @@ class User
         $stmt->execute([$username, $email]);
         
         if ($stmt->fetchColumn() > 0) {
-            throw new ApiException('User', 'Username or email already exists.', 409); 
+            throw new apiException('user', 'Username or email already exists.', 409); 
         }
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
@@ -41,7 +41,7 @@ class User
         $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, firstname, lastname) VALUES (?, ?, ?, ?, ?)");
 
         if (!$stmt->execute([$username, $email, $hashedPassword, $firstname, $lastname])) {
-            throw new ApiException('Register', 'Failed to register user.', 500);
+            throw new apiException('register', 'Failed to register user.', 500);
         }
     }
 
@@ -52,10 +52,10 @@ class User
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if (!$user) {
-            throw new ApiException('Username', 'Username does not exist.', 404);
+            throw new apiException('username', 'Username does not exist.', 404);
         }
         if (!password_verify($password, $user['password'])) {
-            throw new ApiException('Password', 'Invalid password.', 401);
+            throw new apiException('password', 'Invalid password.', 401);
         }
         return $user;
     }
@@ -65,7 +65,7 @@ class User
         $stmt = $this->pdo->prepare("UPDATE users SET password = ? WHERE user_id = ?");
         
         if (!$stmt->execute([password_hash($password, PASSWORD_BCRYPT), $id])) {
-            throw new ApiException('Update Password', 'Failed to update password.', 500);
+            throw new apiException('update password', 'Failed to update password.', 500);
         }
     }
 
