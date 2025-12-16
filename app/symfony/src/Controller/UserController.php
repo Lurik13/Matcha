@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Exception\ApiException;
 use App\Model\User;
 use App\Service\Database;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,19 +42,19 @@ class UserController extends AbstractController
     #[Route('/user/{id}', name: 'get_user', methods: ['GET'])]
     public function getUserId(int $id): Response
     {
-        $user = $this->userModel->getUserById($id);
-
-        if (!$user) {
-            return $this->error('User', 'User not found', 404);
+        try {
+            $user = $this->userModel->getUserById($id);
+            return $this->json($user);
+        } catch (ApiException $e) {
+            return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
         }
-
-        return $this->json($user);
     }
 
     #[Route('/register', name : 'register', methods : ['POST'])]
     public function register(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
+
         $username = trim(htmlspecialchars($data['username'] ?? null));
         $email = trim(htmlspecialchars($data['email'] ?? null));
         $password = trim(htmlspecialchars($data['password'] ?? null));
@@ -79,8 +80,8 @@ class UserController extends AbstractController
         try {
             $this->userModel->registerUser($username, $email, $password, $firstname, $lastname);
             return $this->success('Register', 'User registered successfully', 201);
-        } catch (\Exception $e) {
-            return $this->error('Register', $e->getMessage(), 400);
+        } catch (ApiException $e) {
+            return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
         }
 
     }
@@ -89,6 +90,7 @@ class UserController extends AbstractController
     public function login(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
+
         $username = trim(htmlspecialchars($data['username'] ?? null));
         $password = trim(htmlspecialchars($data['password'] ?? null));
 
@@ -102,8 +104,8 @@ class UserController extends AbstractController
         try {
             $user = $this->userModel->loginUser($username, $password);
             return $this->success('Login', "Login successful. Welcome, {$user['firstname']}!", 201);
-        } catch (\Exception $e) {
-            return $this->error('Login', $e->getMessage(), 401);
+        } catch (ApiException $e) {
+            return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
         }
     }
 
@@ -111,15 +113,19 @@ class UserController extends AbstractController
     public function updatePassword(int $id, Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
+
         $newPassword = trim(htmlspecialchars($data['password'] ?? null));
 
         if (!$newPassword) {
             return $this->error('Password', 'Missing new password', 400);
         }
 
-        $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
-        $this->userModel->updatePassword($hashedPassword, $id);
-
-        return $this->success('Password', 'Password updated successfully', 200);
+        try {
+            $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+            $this->userModel->updatePassword($hashedPassword, $id);
+            return $this->success('Update Password', 'Password updated successfully', 200);
+        } catch (ApiException $e) {
+            return $this->error($e->getName(), $e->getMessage(), $e->getStatus());
+        }
     }
 }
