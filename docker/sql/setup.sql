@@ -17,3 +17,11 @@ CREATE TABLE IF NOT EXISTS user_pictures (
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS likes (
+    like_id INT AUTO_INCREMENT PRIMARY KEY,
+    liker_id INT NOT NULL,
+    liked_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (liker_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (liked_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
