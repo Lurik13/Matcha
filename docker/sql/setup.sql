@@ -8,3 +8,12 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS user_pictures (
+    picture_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    picture_path VARCHAR(255) NOT NULL,
+    is_profile_picture BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
