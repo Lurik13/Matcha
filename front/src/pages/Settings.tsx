@@ -12,6 +12,7 @@ interface FormFields {
   gender: string;
   allegiance: string;
   biography: string;
+  interests: Record<string, string[]>;
 }
 
 function Settings() {
@@ -20,18 +21,25 @@ function Settings() {
   const save = useFetch("register", () => navigate("/settings"), (err) => setErrors(err));
   
   const [form, setForm] = useState<FormFields>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    gender: "",
-    allegiance: "",
-    biography: "",
+    firstName: "Lucas",
+    lastName: "Ribette",
+    email: "lucas.ribette@gmail.com",
+    gender: "Light",
+    allegiance: "Dark",
+    biography: "Je s'appelle Groot.",
+    interests: {
+      'nourriture': [],
+      'sport': []
+    }
   });
 
   const fields: { key: keyof FormFields; label: string; placeholder?: string; type: string }[] = [
     { key: "firstName", label: "First Name", placeholder: "Hego", type: "text" },
     { key: "lastName", label: "Last Name", placeholder: "Damask", type: "text" },
     { key: "email", label: "Email", placeholder: "example@test.com", type: "email" },
+    { key: "gender", label: "Gender", type: "Radio" },
+    { key: "allegiance", label: "Allegiance", type: "Radio" },
+    { key: "interests", label: "Interests", type: "Checkbox" },
   ];
 
   const handleClick = () => {
@@ -47,7 +55,7 @@ function Settings() {
   };
 
   return (
-    <Connexion height={552} title='Settings'>
+    <Connexion height={552} width={900} title='Settings'>
       {fields.map(f => {
         return (
           <Input
