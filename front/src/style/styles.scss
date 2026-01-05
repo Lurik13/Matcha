@@ -1,4 +1,4 @@
-@import './text-glow';
+@use './text-glow';
 
 .languageButton {
   @extend .white-glow;
@@ -13,4 +13,14 @@
   cursor: pointer;
   user-select: none;
   z-index: 30;
+}
+
+input[type="radio"]{
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
+
+input[type="radio"]:checked + label{
+  background-color: #58ba83;
 }

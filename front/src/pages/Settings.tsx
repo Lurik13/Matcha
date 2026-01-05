@@ -4,6 +4,7 @@ import { useState } from 'react';
 import useFetch from '$/hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
 import Input from '$/components/Input';
+import Radio from '$/components/Radio';
 
 interface FormFields {
   firstName: string;
@@ -37,9 +38,9 @@ function Settings() {
     { key: "firstName", label: "First Name", placeholder: "Hego", type: "text" },
     { key: "lastName", label: "Last Name", placeholder: "Damask", type: "text" },
     { key: "email", label: "Email", placeholder: "example@test.com", type: "email" },
-    { key: "gender", label: "Gender", type: "Radio" },
-    { key: "allegiance", label: "Allegiance", type: "Radio" },
-    { key: "interests", label: "Interests", type: "Checkbox" },
+    { key: "gender", label: "Gender", type: "radio" },
+    { key: "allegiance", label: "Allegiance", type: "radio" },
+    { key: "interests", label: "Interests", type: "checkbox" },
   ];
 
   const handleClick = () => {
@@ -57,6 +58,13 @@ function Settings() {
   return (
     <Connexion height={552} width={900} title='Settings'>
       {fields.map(f => {
+        if (f.type === "radio") {
+          return (
+            <Radio
+              label={f.label}
+            />
+          );
+        }
         return (
           <Input
             key={f.key}
