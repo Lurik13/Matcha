@@ -54,7 +54,6 @@ function Settings() {
   };
 
   const handleChange = (key: string, value: string) => {
-    console.log(key, value)
     setForm(prev => ({ ...prev, [key]: value }));
   };
 
