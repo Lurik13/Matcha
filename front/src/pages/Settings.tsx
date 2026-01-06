@@ -38,8 +38,8 @@ function Settings() {
     { key: "firstName", label: "First Name", placeholder: "Hego", type: "text" },
     { key: "lastName", label: "Last Name", placeholder: "Damask", type: "text" },
     { key: "email", label: "Email", placeholder: "example@test.com", type: "email" },
-    { key: "gender", label: "Gender", type: "radio", value: "Grey" },
-    { key: "allegiance", label: "Allegiance", type: "radio", value: "Light" },
+    { key: "gender", label: "Gender", type: "radio" },
+    { key: "allegiance", label: "Allegiance", type: "radio" },
     { key: "interests", label: "Interests", type: "checkbox" },
   ];
 
@@ -48,10 +48,13 @@ function Settings() {
       firstname: form.firstName,
       lastname: form.lastName,
       email: form.email,
+      gender: form.gender,
+      allegiance: form.allegiance,
     });
   };
 
   const handleChange = (key: string, value: string) => {
+    console.log(key, value)
     setForm(prev => ({ ...prev, [key]: value }));
   };
 
@@ -61,15 +64,18 @@ function Settings() {
         if (f.type === "radio") {
           return (
             <Radio
+              key={f.key}
               label={f.label}
-              value={f?.value}
+              value={form[f.key] as string}
+              name={f.key}
+              onChange={handleChange}
             />
           );
         }
         return (
           <Input
             key={f.key}
-            value={form[f.key]}
+            value={form[f.key] as string}
             label={f.label}
             placeholder={f.placeholder}
             type={f.type}
