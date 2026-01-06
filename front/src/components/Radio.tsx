@@ -1,13 +1,11 @@
 interface Props {
-  // value: string;
+  value?: string;
   label: string;
   className?: string;
-  // errors: Error[];
 }
 
 function Radio (props: Props) {
   const choices = ['Light', 'Grey', 'Dark'];
-  // const error = props.errors.some((e) => e.name === props.label);
   return (
     <div className={`my-5 ${props?.className} blue-glow`}>
       <p className="text-xs float-left ">{props.label}</p>
@@ -21,6 +19,7 @@ function Radio (props: Props) {
                 type="radio"
                 name={props.label}
                 className="hidden"
+                checked={props?.value === choice}
               />
               <label
                 htmlFor={id}

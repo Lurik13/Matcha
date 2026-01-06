@@ -34,12 +34,12 @@ function Settings() {
     }
   });
 
-  const fields: { key: keyof FormFields; label: string; placeholder?: string; type: string }[] = [
+  const fields: { key: keyof FormFields; label: string; placeholder?: string; type: string, value?: string }[] = [
     { key: "firstName", label: "First Name", placeholder: "Hego", type: "text" },
     { key: "lastName", label: "Last Name", placeholder: "Damask", type: "text" },
     { key: "email", label: "Email", placeholder: "example@test.com", type: "email" },
-    { key: "gender", label: "Gender", type: "radio" },
-    { key: "allegiance", label: "Allegiance", type: "radio" },
+    { key: "gender", label: "Gender", type: "radio", value: "Grey" },
+    { key: "allegiance", label: "Allegiance", type: "radio", value: "Light" },
     { key: "interests", label: "Interests", type: "checkbox" },
   ];
 
@@ -62,6 +62,7 @@ function Settings() {
           return (
             <Radio
               label={f.label}
+              value={f?.value}
             />
           );
         }

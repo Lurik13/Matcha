@@ -15,12 +15,18 @@
   z-index: 30;
 }
 
-input[type="radio"]{
+input[type="radio"] {
   visibility: hidden;
   height: 0;
   width: 0;
 }
 
-input[type="radio"]:checked + label{
-  background-color: #58ba83;
+input[type="radio"]:checked + label {
+  @extend .white-glow;
+  opacity: 1;
+}
+
+input[type="radio"]:not(:checked) + label {
+  @extend .blue-glow;
+  opacity: 0.7;
 }
