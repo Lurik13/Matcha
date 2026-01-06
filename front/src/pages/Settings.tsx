@@ -5,6 +5,7 @@ import useFetch from '$/hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
 import Input from '$/components/Input';
 import Radio from '$/components/Radio';
+import Tags from '$/components/Tags';
 
 interface FormFields {
   firstName: string;
@@ -13,7 +14,7 @@ interface FormFields {
   gender: string;
   allegiance: string;
   biography: string;
-  interests: Record<string, string[]>;
+  interests: string[];
 }
 
 function Settings() {
@@ -28,18 +29,16 @@ function Settings() {
     gender: "Light",
     allegiance: "Dark",
     biography: "Je s'appelle Groot.",
-    interests: {
-      'nourriture': [],
-      'sport': []
-    }
+    interests: ['tartiflette', 'vtt', 'course à pied', 'tchoukball'],
   });
 
-  const fields: { key: keyof FormFields; label: string; placeholder?: string; type: string, value?: string }[] = [
+    const fields: { key: keyof FormFields; label: string; placeholder?: string; type: string, value?: string | string[] }[] = [
     { key: "firstName", label: "First Name", placeholder: "Hego", type: "text" },
     { key: "lastName", label: "Last Name", placeholder: "Damask", type: "text" },
     { key: "email", label: "Email", placeholder: "example@test.com", type: "email" },
     { key: "gender", label: "Gender", type: "radio" },
     { key: "allegiance", label: "Allegiance", type: "radio" },
+    { key: "biography", label: "Biography", type: "textarea" },
     { key: "interests", label: "Interests", type: "checkbox" },
   ];
 
@@ -69,6 +68,18 @@ function Settings() {
               name={f.key}
               onChange={handleChange}
             />
+          );
+        } else if (f.type === "checkbox") {
+          return (
+            <div>
+              <Tags
+                key={f.key}
+                label={f.label}
+                value={form[f.key] as string[]}
+                name={f.key}
+                onChange={handleChange}
+              />
+            </div>
           );
         }
         return (

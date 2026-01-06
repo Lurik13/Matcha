@@ -4,8 +4,6 @@ import "$/style/styles.scss";
 function LanguageButton() {
   function handleClick() {
     document.body.classList.toggle('latin-mode');
-    const elem = document.body.classList;
-    console.log(elem);
   }
 
   return (

@@ -11,6 +11,7 @@ interface Props {
 
 function Input (props: Props) {
   const error = props.errors.some((e) => e.name === props.label);
+  const className = `border w-full px-1 ${props?.inputClassName}`;
   return (
     <div className={`my-5 ${props?.className}`}>
       <label 
@@ -19,20 +20,33 @@ function Input (props: Props) {
       >
         {props.label}
       </label>
-      <input
-        className={`border w-full px-1 ${props?.inputClassName}`}
-        id={props.label}
-        name={props.label}
-        value={props.value ? props.value : ""}
-        placeholder={props?.placeholder}
-        type={props.type}
-        onChange={props.onChange}
-      />
-      {error &&
-        <p className="text-red-500 text-xs flex justify-start red-glow">
+      {props.type === "textarea" ? (
+        <textarea 
+          className={`${className} max-h-24`}
+          id={props.label}
+          name={props.label}
+          value={props.value ? props.value : ""}
+          placeholder={props?.placeholder}
+          // onChange={props.onChange}
+        />
+      ) : (
+        <div>
+          <input
+            className={className}
+            id={props.label}
+            name={props.label}
+            value={props.value ? props.value : ""}
+            placeholder={props?.placeholder}
+            type={props.type}
+            onChange={props.onChange}
+          />
+        {error &&
+          <p className="text-red-500 text-xs flex justify-start red-glow">
           {error}
-        </p>
-      }
+          </p>
+        }
+      </div>
+    )}
     </div>
   );
 }
